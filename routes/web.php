@@ -8,8 +8,9 @@ use App\Http\Controllers\InvoiceDownloadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SellerController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
-Route::get('/', fn () => view('landing'))->name('landing');
+Route::get('/', fn () => Inertia::render('Landing'))->name('landing');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
