@@ -8,7 +8,7 @@ const MOCK_ROWS = [
 ];
 
 const STATUS_BADGE = {
-    generated: { label: 'Emitida', className: 'bg-emerald-500/10 text-emerald-400 ring-emerald-500/30' },
+    generated: { label: 'Emitida', className: 'bg-[#EE4D2D]/10 text-[#EE4D2D] ring-[#EE4D2D]/30' },
     processing: { label: 'Processando', className: 'bg-amber-500/10 text-amber-400 ring-amber-500/30' },
     queued: { label: 'Na fila', className: 'bg-neutral-500/10 text-neutral-400 ring-neutral-500/30' },
 };
@@ -17,17 +17,17 @@ export function Hero() {
     return (
         <section className="relative overflow-hidden bg-[#0a0a0a]">
             <div className="pointer-events-none absolute inset-0">
-                <div className="absolute left-1/2 top-[-10rem] h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-emerald-500/20 blur-[120px]" />
+                <div className="absolute left-1/2 top-[-10rem] h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-[#EE4D2D]/20 blur-[120px]" />
             </div>
 
             <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-20 lg:px-8 lg:pt-28">
                 <div className="mx-auto max-w-3xl text-center">
-                    <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-emerald-400">
+                    <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-[#EE4D2D]">
                         Feito para afiliados Shopee
                     </span>
 
                     <h1 className="mt-6 text-5xl font-extrabold tracking-tight text-white sm:text-6xl">
-                        Chega de emitir NF-e <span className="text-emerald-400">manualmente</span> para afiliados Shopee
+                        Chega de emitir NF-e <span className="text-[#EE4D2D]">manualmente</span> para afiliados Shopee
                     </h1>
 
                     <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-neutral-400">
@@ -39,7 +39,7 @@ export function Hero() {
                     <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                         <Link
                             href={route('register')}
-                            className="w-full rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-black transition hover:bg-emerald-400 sm:w-auto"
+                            className="w-full rounded-full bg-[#EE4D2D] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#D94426] sm:w-auto"
                         >
                             Começar gratuitamente
                         </Link>
@@ -53,11 +53,11 @@ export function Hero() {
                 </div>
 
                 <div className="relative mx-auto mt-20 max-w-4xl">
-                    <div className="overflow-hidden rounded-xl border border-white/10 bg-[#111113] shadow-2xl shadow-emerald-500/10">
+                    <div className="overflow-hidden rounded-xl border border-white/10 bg-[#111113] shadow-2xl shadow-[#EE4D2D]/10">
                         <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
                             <span className="h-3 w-3 rounded-full bg-red-500/60" />
                             <span className="h-3 w-3 rounded-full bg-yellow-500/60" />
-                            <span className="h-3 w-3 rounded-full bg-emerald-500/60" />
+                            <span className="h-3 w-3 rounded-full bg-[#EE4D2D]/60" />
                             <span className="ml-3 text-xs text-neutral-500">nf-facilitator.app/imports/42</span>
                         </div>
 

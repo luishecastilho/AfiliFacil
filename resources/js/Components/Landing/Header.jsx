@@ -14,7 +14,7 @@ export function Header() {
         <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0a0a0a]/80 backdrop-blur-md">
             <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
                 <Link href="/" className="flex items-center gap-2">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#EE4D2D]/10 text-[#EE4D2D]">
                         <Zap className="h-5 w-5" />
                     </span>
                     <span className="text-base font-semibold tracking-tight text-white">NF Facilitator</span>
@@ -34,7 +34,7 @@ export function Header() {
                     </Link>
                     <Link
                         href={route('register')}
-                        className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-black transition hover:bg-emerald-400"
+                        className="rounded-full bg-[#EE4D2D] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#D94426]"
                     >
                         Começar grátis
                     </Link>
@@ -64,7 +64,7 @@ export function Header() {
                         </Link>
                         <Link
                             href={route('register')}
-                            className="w-full rounded-full bg-emerald-500 px-4 py-2 text-center text-sm font-semibold text-black hover:bg-emerald-400"
+                            className="w-full rounded-full bg-[#EE4D2D] px-4 py-2 text-center text-sm font-semibold text-white hover:bg-[#D94426]"
                         >
                             Começar grátis
                         </Link>

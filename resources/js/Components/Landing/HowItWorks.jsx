@@ -41,10 +41,10 @@ export function HowItWorks() {
                     {STEPS.map((step, index) => (
                         <div
                             key={step.title}
-                            className="group relative rounded-2xl border border-neutral-200 bg-white p-6 transition hover:border-emerald-500/40 hover:shadow-lg hover:shadow-emerald-500/5"
+                            className="group relative rounded-2xl border border-neutral-200 bg-white p-6 transition hover:border-[#EE4D2D]/40 hover:shadow-lg hover:shadow-[#EE4D2D]/5"
                         >
                             <div className="flex items-center gap-3">
-                                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600">
+                                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#EE4D2D]/10 text-[#EE4D2D]">
                                     <step.icon className="h-5 w-5" />
                                 </span>
                                 <span className="text-xs font-semibold text-neutral-400">Passo {index + 1}</span>
@@ -59,7 +59,7 @@ export function HowItWorks() {
                 <div className="mt-16 flex justify-center">
                     <Link
                         href={route('register')}
-                        className="rounded-full bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-600"
+                        className="rounded-full bg-neutral-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#D94426]"
                     >
                         Começar gratuitamente
                     </Link>
