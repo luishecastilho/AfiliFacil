@@ -29,6 +29,10 @@ class User extends Authenticatable
         'nf_usage_this_month',
     ];
 
+    protected $attributes = [
+        'notification_preferences' => '{"email":true,"database":true}',
+    ];
+
     /**
      * The attributes that should be hidden for serialization.
      *

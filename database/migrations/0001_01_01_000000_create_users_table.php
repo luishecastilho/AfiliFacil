@@ -20,7 +20,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->text('two_factor_secret')->nullable();
             $table->text('two_factor_recovery_codes')->nullable();
-            $table->json('notification_preferences')->default('{}');
+            $table->json('notification_preferences');
             $table->timestamps();
         });
 

@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('slug', 100)->unique();
             $table->string('importer_class', 255);
             $table->boolean('active')->default(true);
-            $table->json('config')->default('{}');
+            $table->json('config');
             $table->timestamps();
         });
     }

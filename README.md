@@ -1,59 +1,86 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# NF-facilitator
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Affiliate Invoice Manager** — SaaS platform that automates Brazilian NF-e invoice generation from marketplace commission reports.
 
-## About Laravel
+Upload a Shopee commission report (CSV/XLSX), validate rows, group by seller/month, issue NF-e in batch, and download PDF/XML/ZIP.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Backend:** Laravel 12, PHP 8.4
+- **Frontend:** React 19, Inertia.js v2, Tailwind CSS, shadcn/ui
+- **Infrastructure:** MySQL, Redis, AWS S3, Stripe (Cashier), Horizon
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Quick Start
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```bash
+# Clone and install
+composer setup          # install deps, generate key, migrate, npm build
 
-## Laravel Sponsors
+# Configure environment
+cp .env.example .env    # edit DB, Redis, AWS, Stripe credentials
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# Seed marketplace data
+php artisan db:seed --class=MarketplaceSeeder
 
-### Premium Partners
+# Start dev environment (server + queue + logs + Vite)
+composer dev
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Visit `http://localhost:8000`. Register a user, upload a commission report, and follow the import → invoice pipeline.
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Documentation
 
-## Code of Conduct
+| Document | Description |
+|----------|-------------|
+| **[CLAUDE.md](CLAUDE.md)** | AI entry point — architecture, commands, conventions, priorities |
+| [`.ai/architecture.md`](.ai/architecture.md) | Detailed architecture, data flow, schema |
+| [`.ai/OPERATIONS.md`](.ai/OPERATIONS.md) | Run, build, test, deploy |
+| [`.ai/backlog.md`](.ai/backlog.md) | Pending tasks and priorities |
+| [`.ai/decisions.md`](.ai/decisions.md) | Architectural decisions |
+| [`.ai/roadmap.md`](.ai/roadmap.md) | Short and long-term goals |
+| [`ARCHITECTURE.md`](ARCHITECTURE.md) | Original design document |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### AI Workflows
 
-## Security Vulnerabilities
+| Workflow | Purpose |
+|----------|---------|
+| [`.ai/workflows/implement-task.md`](.ai/workflows/implement-task.md) | Step-by-step task implementation |
+| [`.ai/workflows/create-tests.md`](.ai/workflows/create-tests.md) | Writing and running tests |
+| [`.ai/workflows/review-code.md`](.ai/workflows/review-code.md) | Code review checklist |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
+
+## Key Commands
+
+```bash
+composer dev          # Dev server + queue + logs + Vite
+composer test         # Run PHPUnit tests
+npm run dev           # Vite dev server only
+npm run build         # Production frontend build
+php artisan horizon   # Queue dashboard
+./vendor/bin/pint     # Code formatting
+```
+
+---
+
+## Subscription Plans
+
+| Plan | Price | NF-e/month |
+|------|-------|-----------|
+| Gratuito | R$ 0 | 5 |
+| Básico | R$ 39,90 | 50 |
+| Avançado | R$ 169,90 | Unlimited |
+
+Configured in `config/plans.php`. Stripe price IDs via `STRIPE_PRICE_BASIC` and `STRIPE_PRICE_ADVANCED` env vars.
+
+---
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MIT

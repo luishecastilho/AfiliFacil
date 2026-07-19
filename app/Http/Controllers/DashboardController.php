@@ -18,6 +18,13 @@ class DashboardController extends Controller
                     'import',
                     fn ($query) => $query->where('user_id', $request->user()->id)
                 )->count(),
+                'total_sellers' => $request->user()->sellers()->count(),
+                'issued_this_month' => Invoice::whereHas(
+                    'import',
+                    fn ($query) => $query->where('user_id', $request->user()->id)
+                )->where('status', 'generated')
+                    ->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])
+                    ->count(),
             ],
         ]);
     }

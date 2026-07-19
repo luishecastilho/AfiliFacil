@@ -13,11 +13,11 @@ import {
 
 export default function Index({ sellers }) {
     return (
-        <AppLayout header={<h2 className="text-xl font-semibold leading-tight text-gray-800">Sellers</h2>}>
+        <AppLayout header={<h2 className="text-base font-semibold text-foreground">Sellers</h2>}>
             <Head title="Sellers" />
 
-            <div className="py-12">
-                <div className="mx-auto max-w-7xl space-y-4 sm:px-6 lg:px-8">
+            <div className="space-y-4">
+                <div className="space-y-4">
                     <div className="rounded-md border bg-white">
                         <Table>
                             <TableHeader>

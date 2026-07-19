@@ -16,11 +16,11 @@ import {
 
 export default function Index({ imports }) {
     return (
-        <AppLayout header={<h2 className="text-xl font-semibold leading-tight text-gray-800">Imports</h2>}>
+        <AppLayout header={<h2 className="text-base font-semibold text-foreground">Imports</h2>}>
             <Head title="Imports" />
 
-            <div className="py-12">
-                <div className="mx-auto max-w-7xl space-y-4 sm:px-6 lg:px-8">
+            <div className="space-y-4">
+                <div className="space-y-4">
                     <div className="flex justify-end">
                         <Button asChild>
                             <Link href={route('imports.create')}>New Import</Link>

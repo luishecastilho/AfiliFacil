@@ -1,8 +1,8 @@
 import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
 import AuthLayout from '@/Layouts/AuthLayout';
+import { Button } from '@/Components/ui/Button';
+import { Input } from '@/Components/ui/Input';
+import { Label } from '@/Components/ui/Label';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Register() {
@@ -15,106 +15,84 @@ export default function Register() {
 
     const submit = (e) => {
         e.preventDefault();
-
         post(route('register'), {
             onFinish: () => reset('password', 'password_confirmation'),
         });
     };
 
     return (
-        <AuthLayout>
+        <AuthLayout title="Create your account" description="Get started with NF-facilitator in minutes">
             <Head title="Register" />
 
-            <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="name" value="Name" />
-
-                    <TextInput
+            <form onSubmit={submit} className="flex flex-col gap-5">
+                <div className="grid gap-2">
+                    <Label htmlFor="name">Name</Label>
+                    <Input
                         id="name"
                         name="name"
                         value={data.name}
-                        className="mt-1 block w-full"
                         autoComplete="name"
-                        isFocused={true}
-                        onChange={(e) => setData('name', e.target.value)}
+                        autoFocus
                         required
+                        onChange={(e) => setData('name', e.target.value)}
                     />
-
-                    <InputError message={errors.name} className="mt-2" />
+                    <InputError message={errors.name} />
                 </div>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
-
-                    <TextInput
+                <div className="grid gap-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
                         id="email"
                         type="email"
                         name="email"
                         value={data.email}
-                        className="mt-1 block w-full"
                         autoComplete="username"
-                        onChange={(e) => setData('email', e.target.value)}
+                        placeholder="you@example.com"
                         required
+                        onChange={(e) => setData('email', e.target.value)}
                     />
-
-                    <InputError message={errors.email} className="mt-2" />
+                    <InputError message={errors.email} />
                 </div>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
-                    <TextInput
+                <div className="grid gap-2">
+                    <Label htmlFor="password">Password</Label>
+                    <Input
                         id="password"
                         type="password"
                         name="password"
                         value={data.password}
-                        className="mt-1 block w-full"
                         autoComplete="new-password"
-                        onChange={(e) => setData('password', e.target.value)}
                         required
+                        onChange={(e) => setData('password', e.target.value)}
                     />
-
-                    <InputError message={errors.password} className="mt-2" />
+                    <InputError message={errors.password} />
                 </div>
 
-                <div className="mt-4">
-                    <InputLabel
-                        htmlFor="password_confirmation"
-                        value="Confirm Password"
-                    />
-
-                    <TextInput
+                <div className="grid gap-2">
+                    <Label htmlFor="password_confirmation">Confirm password</Label>
+                    <Input
                         id="password_confirmation"
                         type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}
-                        className="mt-1 block w-full"
                         autoComplete="new-password"
-                        onChange={(e) =>
-                            setData('password_confirmation', e.target.value)
-                        }
                         required
+                        onChange={(e) => setData('password_confirmation', e.target.value)}
                     />
-
-                    <InputError
-                        message={errors.password_confirmation}
-                        className="mt-2"
-                    />
+                    <InputError message={errors.password_confirmation} />
                 </div>
 
-                <div className="mt-4 flex items-center justify-end">
-                    <Link
-                        href={route('login')}
-                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >
-                        Already registered?
-                    </Link>
-
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Register
-                    </PrimaryButton>
-                </div>
+                <Button type="submit" className="w-full" disabled={processing}>
+                    Create account
+                </Button>
             </form>
+
+            <div className="mt-6 text-center text-sm text-muted-foreground">
+                Already have an account?{' '}
+                <Link href={route('login')} className="text-foreground underline underline-offset-4">
+                    Log in
+                </Link>
+            </div>
         </AuthLayout>
     );
 }

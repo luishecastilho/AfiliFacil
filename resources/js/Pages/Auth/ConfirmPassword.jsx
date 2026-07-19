@@ -1,8 +1,8 @@
 import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
 import AuthLayout from '@/Layouts/AuthLayout';
+import { Button } from '@/Components/ui/Button';
+import { Input } from '@/Components/ui/Input';
+import { Label } from '@/Components/ui/Label';
 import { Head, useForm } from '@inertiajs/react';
 
 export default function ConfirmPassword() {
@@ -12,43 +12,35 @@ export default function ConfirmPassword() {
 
     const submit = (e) => {
         e.preventDefault();
-
         post(route('password.confirm'), {
             onFinish: () => reset('password'),
         });
     };
 
     return (
-        <AuthLayout>
+        <AuthLayout
+            title="Confirm password"
+            description="This is a secure area. Please confirm your password to continue."
+        >
             <Head title="Confirm Password" />
 
-            <div className="mb-4 text-sm text-gray-600">
-                This is a secure area of the application. Please confirm your
-                password before continuing.
-            </div>
-
-            <form onSubmit={submit}>
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
-                    <TextInput
+            <form onSubmit={submit} className="flex flex-col gap-6">
+                <div className="grid gap-2">
+                    <Label htmlFor="password">Password</Label>
+                    <Input
                         id="password"
                         type="password"
                         name="password"
                         value={data.password}
-                        className="mt-1 block w-full"
-                        isFocused={true}
+                        autoFocus
                         onChange={(e) => setData('password', e.target.value)}
                     />
-
-                    <InputError message={errors.password} className="mt-2" />
+                    <InputError message={errors.password} />
                 </div>
 
-                <div className="mt-4 flex items-center justify-end">
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Confirm
-                    </PrimaryButton>
-                </div>
+                <Button type="submit" className="w-full" disabled={processing}>
+                    Confirm
+                </Button>
             </form>
         </AuthLayout>
     );

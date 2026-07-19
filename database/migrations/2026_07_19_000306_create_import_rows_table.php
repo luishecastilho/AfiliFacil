@@ -22,7 +22,7 @@ return new class extends Migration
                 'pending', 'valid', 'invalid', 'duplicate', 'queued', 'invoiced', 'failed',
             ])->default('pending');
             $table->json('validation_errors')->nullable();
-            $table->json('payload')->default('{}');
+            $table->json('payload');
             $table->timestamps();
 
             $table->index(['import_id', 'status']);

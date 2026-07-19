@@ -18,10 +18,10 @@ export default function Index({ plans, currentPlan, nfUsedThisMonth, nfLimit, ha
     }
 
     return (
-        <AppLayout header={<h2 className="text-xl font-semibold leading-tight text-gray-800">Assinatura</h2>}>
+        <AppLayout header={<h2 className="text-base font-semibold text-foreground">Assinatura</h2>}>
             <Head title="Assinatura" />
 
-            <div className="py-12">
+            <div className="space-y-4">
                 <div className="mx-auto max-w-3xl space-y-6 sm:px-6 lg:px-8">
                     <Card>
                         <CardHeader>
