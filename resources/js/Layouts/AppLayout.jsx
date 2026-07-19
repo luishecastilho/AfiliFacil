@@ -2,6 +2,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
+import { NfUsageBar } from '@/Components/App/NfUsageBar';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
@@ -9,6 +10,7 @@ const NAV_ITEMS = [
     { name: 'Dashboard', route: 'dashboard' },
     { name: 'Imports', route: 'imports.index' },
     { name: 'Invoices', route: 'invoices.index' },
+    { name: 'Billing', route: 'billing.index' },
 ];
 
 export default function AppLayout({ header, children }) {
@@ -134,6 +136,8 @@ export default function AppLayout({ header, children }) {
                     </div>
                 </div>
             </nav>
+
+            <NfUsageBar />
 
             {header && (
                 <header className="bg-white shadow">

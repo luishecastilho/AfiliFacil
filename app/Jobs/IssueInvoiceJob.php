@@ -3,8 +3,11 @@
 namespace App\Jobs;
 
 use App\Actions\Invoice\IssueInvoiceAction;
+use App\Enums\InvoiceEventType;
+use App\Enums\InvoiceStatus;
 use App\Exceptions\InvoiceProviderException;
 use App\Models\Invoice;
+use App\Services\SubscriptionService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -31,13 +34,28 @@ class IssueInvoiceJob implements ShouldQueue
         return [10, 30, 60, 300, 900];
     }
 
-    public function handle(IssueInvoiceAction $issueInvoiceAction): void
+    public function handle(IssueInvoiceAction $issueInvoiceAction, SubscriptionService $subscriptionService): void
     {
+        $user = $this->invoice->import->user;
+
+        if (! $subscriptionService->canIssueInvoice($user)) {
+            $this->invoice->update([
+                'status' => InvoiceStatus::Failed,
+            ]);
+            $this->invoice->events()->create([
+                'event' => InvoiceEventType::Failed,
+                'metadata' => ['error' => 'Limite do plano atingido'],
+            ]);
+
+            return;
+        }
+
         Redis::throttle('invoice-provider')->allow(10)->every(60)->then(
-            function () use ($issueInvoiceAction) {
+            function () use ($issueInvoiceAction, $subscriptionService, $user) {
                 $invoice = $issueInvoiceAction->handle($this->invoice);
 
-                if ($invoice->status === \App\Enums\InvoiceStatus::Generated) {
+                if ($invoice->status === InvoiceStatus::Generated) {
+                    $subscriptionService->incrementUsage($user);
                     UploadInvoiceFilesJob::dispatch($invoice);
                 }
             },
@@ -49,6 +67,6 @@ class IssueInvoiceJob implements ShouldQueue
 
     public function failed(InvoiceProviderException $exception): void
     {
-        $this->invoice->update(['status' => \App\Enums\InvoiceStatus::Failed]);
+        $this->invoice->update(['status' => InvoiceStatus::Failed]);
     }
 }

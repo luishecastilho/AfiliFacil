@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BillingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\ImportRowController;
@@ -7,13 +8,22 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\InvoiceDownloadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\StripeWebhookController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', fn () => Inertia::render('Landing'))->name('landing');
 
+Route::post('/stripe/webhook', [StripeWebhookController::class, 'handleWebhook'])->name('cashier.webhook');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
+
+    Route::get('/billing', [BillingController::class, 'index'])->name('billing.index');
+    Route::post('/billing/checkout', [BillingController::class, 'checkout'])->name('billing.checkout');
+    Route::get('/billing/success', [BillingController::class, 'success'])->name('billing.success');
+    Route::get('/billing/cancel', [BillingController::class, 'cancel'])->name('billing.cancel');
+    Route::post('/billing/portal', [BillingController::class, 'portal'])->name('billing.portal');
 
     Route::resource('imports', ImportController::class)->only(['index', 'create', 'store', 'show', 'destroy']);
     Route::get('/imports/{import}/rows', [ImportRowController::class, 'index'])->name('imports.rows.index');

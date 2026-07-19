@@ -2,6 +2,7 @@ import { Head } from '@inertiajs/react';
 import { Header } from '@/Components/Landing/Header';
 import { Hero } from '@/Components/Landing/Hero';
 import { HowItWorks } from '@/Components/Landing/HowItWorks';
+import { Pricing } from '@/Components/Landing/Pricing';
 import { Footer } from '@/Components/Landing/Footer';
 
 export default function Landing() {
@@ -18,6 +19,7 @@ export default function Landing() {
                 <Header />
                 <Hero />
                 <HowItWorks />
+                <Pricing />
                 <Footer />
             </div>
         </>

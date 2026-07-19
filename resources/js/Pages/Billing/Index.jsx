@@ -1,0 +1,75 @@
+import AppLayout from '@/Layouts/AppLayout';
+import { Head, useForm } from '@inertiajs/react';
+import { Button } from '@/Components/ui/Button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/Card';
+import { formatCurrency } from '@/lib/formatters';
+
+export default function Index({ plans, currentPlan, nfUsedThisMonth, nfLimit, hasStripeSubscription }) {
+    const checkoutForm = useForm({ plan: '' });
+    const portalForm = useForm({});
+
+    function subscribe(plan) {
+        checkoutForm.setData('plan', plan);
+        checkoutForm.post(route('billing.checkout'));
+    }
+
+    function manageSubscription() {
+        portalForm.post(route('billing.portal'));
+    }
+
+    return (
+        <AppLayout header={<h2 className="text-xl font-semibold leading-tight text-gray-800">Assinatura</h2>}>
+            <Head title="Assinatura" />
+
+            <div className="py-12">
+                <div className="mx-auto max-w-3xl space-y-6 sm:px-6 lg:px-8">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Plano atual: {plans[currentPlan]?.name}</CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-4">
+                            <p className="text-sm text-muted-foreground">
+                                {nfLimit === null
+                                    ? `${nfUsedThisMonth} NF-e emitidas este mês (ilimitado)`
+                                    : `${nfUsedThisMonth} de ${nfLimit} NF-e usadas este mês`}
+                            </p>
+
+                            {hasStripeSubscription && (
+                                <Button variant="outline" onClick={manageSubscription} disabled={portalForm.processing}>
+                                    Gerenciar assinatura
+                                </Button>
+                            )}
+                        </CardContent>
+                    </Card>
+
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                        {Object.entries(plans).map(([key, plan]) => (
+                            <Card key={key} className={key === currentPlan ? 'border-[#EE4D2D]' : ''}>
+                                <CardHeader>
+                                    <CardTitle className="text-base">{plan.name}</CardTitle>
+                                </CardHeader>
+                                <CardContent className="space-y-3">
+                                    <p className="text-2xl font-bold">
+                                        {plan.price > 0 ? `${formatCurrency(plan.price)}/mês` : 'Grátis'}
+                                    </p>
+                                    <p className="text-sm text-muted-foreground">
+                                        {plan.nf_limit === null ? 'NF-e ilimitadas' : `${plan.nf_limit} NF-e por mês`}
+                                    </p>
+                                    {key !== currentPlan && key !== 'free' && (
+                                        <Button
+                                            className="w-full"
+                                            onClick={() => subscribe(key)}
+                                            disabled={checkoutForm.processing}
+                                        >
+                                            Assinar agora
+                                        </Button>
+                                    )}
+                                </CardContent>
+                            </Card>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </AppLayout>
+    );
+}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\SubscriptionService;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -29,11 +30,19 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $user = $request->user();
+        $subscriptionService = app(SubscriptionService::class);
+
         return [
             ...parent::share($request),
             'auth' => [
-                'user' => $request->user(),
+                'user' => $user,
             ],
+            'nf_usage' => $user ? [
+                'used' => $subscriptionService->nfUsedThisMonth($user),
+                'limit' => $subscriptionService->nfLimit($user),
+                'plan' => $subscriptionService->currentPlan($user),
+            ] : null,
         ];
     }
 }
