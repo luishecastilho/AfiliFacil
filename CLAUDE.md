@@ -177,6 +177,7 @@ Public: `/` (Landing page), `/stripe/webhook`.
 | [`.ai/decisions.md`](.ai/decisions.md) | Architectural decisions and rationale |
 | [`.ai/OPERATIONS.md`](.ai/OPERATIONS.md) | Run, build, test, deploy |
 | [`.ai/roadmap.md`](.ai/roadmap.md) | Short and long-term goals |
+| [`.ai/workflows/create-task.md`](.ai/workflows/create-task.md) | How to create/retrieve tasks in Linear (AfiliFacil project) |
 | [`.ai/workflows/create-tests.md`](.ai/workflows/create-tests.md) | How to write and run tests |
 | [`.ai/workflows/implement-task.md`](.ai/workflows/implement-task.md) | Step-by-step task implementation |
 | [`.ai/workflows/review-code.md`](.ai/workflows/review-code.md) | Code review checklist |

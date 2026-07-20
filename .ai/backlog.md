@@ -28,6 +28,11 @@ Priority: **P0** (blocking production) → **P1** (important) → **P2** (nice-t
 
 ---
 
+### Tier B — gov.br + Worklist manual (PLANEJADO, não ativo)
+- **Status:** planejado; caminho ativo é o Tier A (certificado A1). Base pronta (`EmissionMode`, colunas gov.br em `issuers`, gate tier-aware).
+- **Plano:** [`.ai/nfse/tier-b-govbr.md`](.ai/nfse/tier-b-govbr.md) — status `AwaitingManual`, branch de geração manual, worklist + mark-emitted, gov.br OAuth.
+- **Nota:** worklist (itens 1–3) independe do credenciamento gov.br; login gov.br é a camada de identidade posterior.
+
 ## P1 — Important
 
 ### CNPJ/CPF Modulo-11 Validation
