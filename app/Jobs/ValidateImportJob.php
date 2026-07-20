@@ -15,7 +15,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class ValidateImportJob implements ShouldQueue, ShouldBeUnique
+class ValidateImportJob implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -23,9 +23,7 @@ class ValidateImportJob implements ShouldQueue, ShouldBeUnique
 
     public string $queue = 'high';
 
-    public function __construct(public readonly Import $import)
-    {
-    }
+    public function __construct(public readonly Import $import) {}
 
     public function uniqueId(): string
     {

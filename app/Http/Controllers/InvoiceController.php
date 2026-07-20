@@ -8,6 +8,7 @@ use App\Http\Requests\Invoice\RetryInvoiceRequest;
 use App\Jobs\GenerateInvoicesJob;
 use App\Models\Import;
 use App\Models\Invoice;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -50,7 +51,7 @@ class InvoiceController extends Controller
         return back()->with('status', 'Invoice retry queued.');
     }
 
-    public function progress(Import $import): \Illuminate\Http\JsonResponse
+    public function progress(Import $import): JsonResponse
     {
         $this->authorize('view', $import);
 

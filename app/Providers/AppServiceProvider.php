@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\InvoiceProvider\Contracts\InvoiceProviderInterface;
+use App\InvoiceProvider\Providers\NacionalNfseProvider;
 use App\InvoiceProvider\Providers\NullInvoiceProvider;
+use App\Nfse\Dps\DpsBuilder;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +16,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(InvoiceProviderInterface::class, NullInvoiceProvider::class);
+        $this->app->bind(DpsBuilder::class, fn () => new DpsBuilder(config('nf-facilitator.nfse.ver_aplic')));
+
+        $this->app->bind(InvoiceProviderInterface::class, function ($app) {
+            return match (config('nf-facilitator.invoice.driver')) {
+                'nacional' => $app->make(NacionalNfseProvider::class),
+                default => $app->make(NullInvoiceProvider::class),
+            };
+        });
     }
 
     /**

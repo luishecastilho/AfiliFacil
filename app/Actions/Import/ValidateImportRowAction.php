@@ -4,6 +4,7 @@ namespace App\Actions\Import;
 
 use App\Enums\ImportRowStatus;
 use App\Models\ImportRow;
+use App\Support\TaxDocument;
 
 class ValidateImportRowAction
 {
@@ -37,11 +38,8 @@ class ValidateImportRowAction
         return $status;
     }
 
-    /**
-     * TODO: implement modulo-11 checksum validation for CNPJ/CPF.
-     */
     private function isValidTaxDocument(string $document): bool
     {
-        return in_array(strlen($document), [11, 14], true);
+        return TaxDocument::isValid($document);
     }
 }

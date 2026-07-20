@@ -3,6 +3,7 @@
 namespace App\InvoiceProvider\Contracts;
 
 use App\DTOs\InvoicePayloadDTO;
+use App\Exceptions\InvoiceProviderException;
 
 interface InvoiceProviderInterface
 {
@@ -18,7 +19,12 @@ interface InvoiceProviderInterface
      *
      * @return array{invoice_number: string, access_key: string, reference: string, raw: array}
      *
-     * @throws \App\Exceptions\InvoiceProviderException
+     * @throws InvoiceProviderException
      */
     public function issue(InvoicePayloadDTO $payload): array;
+
+    /**
+     * Fetch the DANFSE (PDF) bytes for an authorized document, or null if unavailable.
+     */
+    public function baixarDanfse(string $accessKey, int $issuerId): ?string;
 }

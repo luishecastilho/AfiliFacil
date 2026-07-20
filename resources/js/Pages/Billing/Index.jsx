@@ -1,5 +1,6 @@
 import AppLayout from '@/Layouts/AppLayout';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
+import { ShieldAlert } from 'lucide-react';
 import { Button } from '@/Components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/Card';
 import { formatCurrency } from '@/lib/formatters';
@@ -7,6 +8,8 @@ import { formatCurrency } from '@/lib/formatters';
 export default function Index({ plans, currentPlan, nfUsedThisMonth, nfLimit, hasStripeSubscription }) {
     const checkoutForm = useForm({ plan: '' });
     const portalForm = useForm({});
+    const fiscal = usePage().props.fiscal;
+    const fiscalReady = fiscal?.complete ?? false;
 
     function subscribe(plan) {
         checkoutForm.setData('plan', plan);
@@ -23,6 +26,25 @@ export default function Index({ plans, currentPlan, nfUsedThisMonth, nfLimit, ha
 
             <div className="space-y-4">
                 <div className="mx-auto max-w-3xl space-y-6 sm:px-6 lg:px-8">
+                    {!fiscalReady && (
+                        <Card className="border-amber-400 bg-amber-50 dark:bg-amber-950/20">
+                            <CardContent className="flex items-start gap-3 p-4">
+                                <ShieldAlert className="mt-0.5 size-5 shrink-0 text-amber-600" />
+                                <div className="space-y-2 text-sm">
+                                    <p className="font-medium text-foreground">
+                                        Complete seu cadastro fiscal antes de assinar
+                                    </p>
+                                    <p className="text-muted-foreground">
+                                        A emissão de NFS-e exige um emitente configurado e validado com o portal nacional.
+                                    </p>
+                                    <Button asChild size="sm" variant="outline">
+                                        <Link href={route('issuer.edit')}>Completar cadastro fiscal</Link>
+                                    </Button>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    )}
+
                     <Card>
                         <CardHeader>
                             <CardTitle>Plano atual: {plans[currentPlan]?.name}</CardTitle>
@@ -59,7 +81,8 @@ export default function Index({ plans, currentPlan, nfUsedThisMonth, nfLimit, ha
                                         <Button
                                             className="w-full"
                                             onClick={() => subscribe(key)}
-                                            disabled={checkoutForm.processing}
+                                            disabled={checkoutForm.processing || !fiscalReady}
+                                            title={!fiscalReady ? 'Complete seu cadastro fiscal para assinar' : undefined}
                                         >
                                             Assinar agora
                                         </Button>

@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\AddressLookupController;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\ImportRowController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\InvoiceDownloadController;
+use App\Http\Controllers\IssuerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\StripeWebhookController;
@@ -20,7 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     Route::get('/billing', [BillingController::class, 'index'])->name('billing.index');
-    Route::post('/billing/checkout', [BillingController::class, 'checkout'])->name('billing.checkout');
+    Route::post('/billing/checkout', [BillingController::class, 'checkout'])->middleware('fiscal.ready')->name('billing.checkout');
     Route::get('/billing/success', [BillingController::class, 'success'])->name('billing.success');
     Route::get('/billing/cancel', [BillingController::class, 'cancel'])->name('billing.cancel');
     Route::post('/billing/portal', [BillingController::class, 'portal'])->name('billing.portal');
@@ -40,6 +42,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/sellers', [SellerController::class, 'index'])->name('sellers.index');
     Route::get('/sellers/{seller}/edit', [SellerController::class, 'edit'])->name('sellers.edit');
     Route::patch('/sellers/{seller}', [SellerController::class, 'update'])->name('sellers.update');
+
+    Route::get('/settings/fiscal', [IssuerController::class, 'edit'])->name('issuer.edit');
+    Route::post('/settings/fiscal', [IssuerController::class, 'update'])->name('issuer.update');
+    Route::post('/settings/fiscal/certificate', [IssuerController::class, 'uploadCertificate'])->name('issuer.certificate');
+    Route::post('/settings/fiscal/validate', [IssuerController::class, 'validatePortal'])->name('issuer.validate');
+    Route::get('/cep/{cep}', [AddressLookupController::class, 'show'])->name('cep.lookup');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

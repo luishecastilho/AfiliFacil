@@ -1,6 +1,7 @@
 import AppLayout from '@/Layouts/AppLayout';
 import { Head, router, useForm } from '@inertiajs/react';
 import { useState } from 'react';
+import { Alert } from '@/Components/ui/Alert';
 import { Button } from '@/Components/ui/Button';
 import { SummaryCard } from '@/Components/SummaryCard';
 import { StatusBadge } from '@/Components/StatusBadge';
@@ -44,11 +45,11 @@ export default function Show({ import: importRecord, rows }) {
         <AppLayout
             header={
                 <h2 className="text-base font-semibold text-foreground">
-                    Import: {importRecord.original_filename}
+                    Importação: {importRecord.original_filename}
                 </h2>
             }
         >
-            <Head title={`Import #${importRecord.id}`} />
+            <Head title={`Importação #${importRecord.id}`} />
 
             <div className="space-y-6">
                 <div className="space-y-6">
@@ -57,13 +58,13 @@ export default function Show({ import: importRecord, rows }) {
 
                         {importRecord.status === 'validated' && (
                             <Button onClick={generateInvoices} disabled={processing}>
-                                Generate All Invoices
+                                Gerar todas as notas
                             </Button>
                         )}
 
                         {totalInvoices > 0 && (
                             <a href={route('imports.download.zip', importRecord.id)} className="text-sm underline">
-                                Download All as ZIP
+                                Baixar tudo em ZIP
                             </a>
                         )}
                     </div>
@@ -71,26 +72,26 @@ export default function Show({ import: importRecord, rows }) {
                     {totalInvoices > 0 && (
                         <div className="space-y-2 rounded-md border bg-white p-4">
                             <p className="text-sm text-muted-foreground">
-                                {generatedInvoices} of {totalInvoices} invoices generated
+                                {generatedInvoices} de {totalInvoices} notas geradas
                             </p>
                             <ProgressBar value={generatedInvoices} max={totalInvoices} />
                         </div>
                     )}
 
                     {showInvalidWarning && (
-                        <div className="rounded-md border border-yellow-300 bg-yellow-50 p-4 text-sm text-yellow-800">
-                            This import has {importRecord.invalid_rows} invalid row(s). They will be skipped during
-                            invoice generation unless corrected.
-                        </div>
+                        <Alert variant="warning" title={`${importRecord.invalid_rows} linha(s) com problema`}>
+                            Essas linhas serão ignoradas na geração das notas. Para corrigir: baixe o relatório, ajuste os
+                            dados (ex.: CNPJ/CPF inválido) e importe o arquivo novamente.
+                        </Alert>
                     )}
 
                     <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-                        <SummaryCard title="Total Rows" value={importRecord.total_rows ?? '—'} />
-                        <SummaryCard title="Valid" value={importRecord.valid_rows ?? '—'} />
-                        <SummaryCard title="Invalid" value={importRecord.invalid_rows ?? '—'} />
-                        <SummaryCard title="Duplicate" value={importRecord.duplicate_rows ?? '—'} />
-                        <SummaryCard title="Total Commission" value={formatCurrency(importRecord.total_amount)} />
-                        <SummaryCard title="Unique Sellers" value={importRecord.total_unique_tax_ids ?? '—'} />
+                        <SummaryCard title="Total de linhas" value={importRecord.total_rows ?? '—'} />
+                        <SummaryCard title="Válidas" value={importRecord.valid_rows ?? '—'} />
+                        <SummaryCard title="Inválidas" value={importRecord.invalid_rows ?? '—'} />
+                        <SummaryCard title="Duplicadas" value={importRecord.duplicate_rows ?? '—'} />
+                        <SummaryCard title="Comissão total" value={formatCurrency(importRecord.total_amount)} />
+                        <SummaryCard title="Afiliados únicos" value={importRecord.total_unique_tax_ids ?? '—'} />
                     </div>
 
                     {rows && (
@@ -98,10 +99,10 @@ export default function Show({ import: importRecord, rows }) {
                             <Table>
                                 <TableHeader>
                                     <TableRow>
-                                        <TableHead>Seller</TableHead>
-                                        <TableHead>Document</TableHead>
-                                        <TableHead>Amount</TableHead>
-                                        <TableHead>Reference Month</TableHead>
+                                        <TableHead>Afiliado</TableHead>
+                                        <TableHead>Documento</TableHead>
+                                        <TableHead>Valor</TableHead>
+                                        <TableHead>Competência</TableHead>
                                         <TableHead>Status</TableHead>
                                     </TableRow>
                                 </TableHeader>

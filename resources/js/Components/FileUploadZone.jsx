@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { UploadCloud } from 'lucide-react';
 import { cn } from '@/lib/cn';
 
-export function FileUploadZone({ onFileSelect, accept = '.csv,.xlsx,.xls', file }) {
+export function FileUploadZone({ onFileSelect, accept = '.csv,.xlsx,.xls', file, helperText = 'CSV, XLSX, or XLS' }) {
     const [isDragging, setIsDragging] = useState(false);
 
     const handleDrop = useCallback(
@@ -33,7 +33,7 @@ export function FileUploadZone({ onFileSelect, accept = '.csv,.xlsx,.xls', file 
             <span className="text-sm text-muted-foreground">
                 {file ? file.name : 'Drag and drop a file here, or click to browse'}
             </span>
-            <span className="text-xs text-muted-foreground">CSV, XLSX, or XLS</span>
+            <span className="text-xs text-muted-foreground">{helperText}</span>
             <input
                 type="file"
                 accept={accept}

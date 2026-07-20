@@ -13,9 +13,7 @@ use Inertia\Response;
 
 class BillingController extends Controller
 {
-    public function __construct(private readonly SubscriptionService $subscriptionService)
-    {
-    }
+    public function __construct(private readonly SubscriptionService $subscriptionService) {}
 
     public function index(Request $request): Response
     {
@@ -32,6 +30,12 @@ class BillingController extends Controller
 
     public function checkout(Request $request): RedirectResponse
     {
+        if (! $this->subscriptionService->fiscalReady($request->user())['complete']) {
+            return redirect()
+                ->route('issuer.edit')
+                ->with('warning', 'Complete e valide seu cadastro fiscal antes de assinar um plano.');
+        }
+
         $validated = $request->validate([
             'plan' => ['required', Rule::in(['basic', 'advanced'])],
         ]);

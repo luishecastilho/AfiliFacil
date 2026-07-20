@@ -17,7 +17,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Storage;
 
-class ParseImportJob implements ShouldQueue, ShouldBeUnique
+class ParseImportJob implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -27,9 +27,7 @@ class ParseImportJob implements ShouldQueue, ShouldBeUnique
 
     public string $queue = 'high';
 
-    public function __construct(public readonly Import $import)
-    {
-    }
+    public function __construct(public readonly Import $import) {}
 
     public function uniqueId(): string
     {

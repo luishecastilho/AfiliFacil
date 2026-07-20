@@ -5,6 +5,7 @@ import {
     LayoutDashboard,
     LogOut,
     Receipt,
+    ShieldCheck,
     Upload,
     User,
     Users,
@@ -35,11 +36,12 @@ import {
 } from '@/Components/ui/Sidebar';
 
 const NAV_ITEMS = [
-    { name: 'Dashboard', route: 'dashboard', icon: LayoutDashboard },
-    { name: 'Imports', route: 'imports.index', icon: Upload },
-    { name: 'Invoices', route: 'invoices.index', icon: FileText },
-    { name: 'Sellers', route: 'sellers.index', icon: Users },
-    { name: 'Billing', route: 'billing.index', icon: CreditCard },
+    { name: 'Início', route: 'dashboard', icon: LayoutDashboard },
+    { name: 'Cadastro Fiscal', route: 'issuer.edit', icon: ShieldCheck },
+    { name: 'Importações', route: 'imports.index', icon: Upload },
+    { name: 'Notas', route: 'invoices.index', icon: FileText },
+    { name: 'Afiliados', route: 'sellers.index', icon: Users },
+    { name: 'Assinatura', route: 'billing.index', icon: CreditCard },
 ];
 
 function initials(name = '') {
@@ -55,7 +57,9 @@ function initials(name = '') {
 }
 
 export function AppSidebar() {
-    const user = usePage().props.auth.user;
+    const { auth, fiscal } = usePage().props;
+    const user = auth.user;
+    const fiscalPending = fiscal && !fiscal.complete;
     const { setOpenMobile } = useSidebar();
 
     return (
@@ -70,7 +74,7 @@ export function AppSidebar() {
                                 </div>
                                 <div className="grid flex-1 text-left text-sm leading-tight">
                                     <span className="truncate font-semibold">NF-facilitator</span>
-                                    <span className="truncate text-xs text-muted-foreground">Affiliate Invoices</span>
+                                    <span className="truncate text-xs text-muted-foreground">Notas de afiliados</span>
                                 </div>
                             </Link>
                         </SidebarMenuButton>
@@ -90,6 +94,12 @@ export function AppSidebar() {
                                         <Link href={route(item.route)} onClick={() => setOpenMobile(false)}>
                                             <item.icon />
                                             <span>{item.name}</span>
+                                            {item.route === 'issuer.edit' && fiscalPending && (
+                                                <span
+                                                    className="ml-auto size-2 shrink-0 rounded-full bg-amber-500"
+                                                    title="Cadastro fiscal pendente"
+                                                />
+                                            )}
                                         </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
@@ -141,14 +151,14 @@ export function AppSidebar() {
                                 <DropdownMenuItem asChild>
                                     <Link href={route('profile.edit')}>
                                         <User className="mr-2 size-4" />
-                                        Profile
+                                        Perfil
                                     </Link>
                                 </DropdownMenuItem>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem asChild>
                                     <Link href={route('logout')} method="post" as="button" className="w-full">
                                         <LogOut className="mr-2 size-4" />
-                                        Log out
+                                        Sair
                                     </Link>
                                 </DropdownMenuItem>
                             </DropdownMenuContent>

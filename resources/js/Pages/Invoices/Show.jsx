@@ -1,5 +1,6 @@
 import AppLayout from '@/Layouts/AppLayout';
 import { Head, useForm } from '@inertiajs/react';
+import { Alert } from '@/Components/ui/Alert';
 import { Button } from '@/Components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/Card';
 import { StatusBadge } from '@/Components/StatusBadge';
@@ -14,50 +15,72 @@ export default function Show({ invoice }) {
         post(route('invoices.retry', invoice.id));
     }
 
+    const hasPdf = invoice.files?.some((file) => file.type === 'pdf');
+    const hasXml = invoice.files?.some((file) => file.type === 'xml');
+
     return (
         <AppLayout
-            header={<h2 className="text-base font-semibold text-foreground">Invoice #{invoice.id}</h2>}
+            header={<h2 className="text-base font-semibold text-foreground">Nota #{invoice.id}</h2>}
         >
-            <Head title={`Invoice #${invoice.id}`} />
+            <Head title={`Nota #${invoice.id}`} />
 
             <div className="space-y-4">
                 <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:px-6 lg:grid-cols-3 lg:px-8">
-                    <Card className="lg:col-span-2">
-                        <CardHeader>
-                            <CardTitle className="flex items-center justify-between">
-                                <span>{invoice.seller?.name}</span>
-                                <StatusBadge status={invoice.status} label={INVOICE_STATUS_LABELS[invoice.status]} />
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-2 text-sm">
-                            <p>Reference month: {formatReferenceMonth(invoice.reference_month)}</p>
-                            <p>Amount: {formatCurrency(invoice.amount)}</p>
-                            <p>Invoice number: {invoice.invoice_number ?? '—'}</p>
-                            <p>Access key: {invoice.access_key ?? '—'}</p>
+                    <div className="space-y-4 lg:col-span-2">
+                        {invoice.status === 'failed' && (
+                            <Alert
+                                variant="destructive"
+                                title="A emissão desta nota falhou"
+                                action={
+                                    <Button size="sm" onClick={retry} disabled={processing}>
+                                        Tentar novamente
+                                    </Button>
+                                }
+                            >
+                                Veja o motivo no histórico ao lado. Se for um dado incorreto (ex.: CNPJ do afiliado),
+                                corrija no relatório e importe de novo; caso contrário, tente novamente.
+                            </Alert>
+                        )}
 
-                            <div className="flex gap-2 pt-4">
-                                {invoice.files?.some((file) => file.type === 'pdf') && (
-                                    <Button variant="outline" asChild>
-                                        <a href={route('invoices.download', [invoice.id, 'pdf'])}>Download PDF</a>
-                                    </Button>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle className="flex items-center justify-between">
+                                    <span>{invoice.seller?.name}</span>
+                                    <StatusBadge status={invoice.status} label={INVOICE_STATUS_LABELS[invoice.status]} />
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-2 text-sm">
+                                <p>Competência: {formatReferenceMonth(invoice.reference_month)}</p>
+                                <p>Valor: {formatCurrency(invoice.amount)}</p>
+                                <p>Número da nota: {invoice.invoice_number ?? '—'}</p>
+                                <p className="break-all">Chave de acesso: {invoice.access_key ?? '—'}</p>
+
+                                {(hasPdf || hasXml) && (
+                                    <p className="pt-2 text-xs text-muted-foreground">
+                                        O <strong>PDF</strong> (DANFSE) é a versão para leitura/impressão; o{' '}
+                                        <strong>XML</strong> é o documento fiscal oficial — guarde-o por 5 anos.
+                                    </p>
                                 )}
-                                {invoice.files?.some((file) => file.type === 'xml') && (
-                                    <Button variant="outline" asChild>
-                                        <a href={route('invoices.download', [invoice.id, 'xml'])}>Download XML</a>
-                                    </Button>
-                                )}
-                                {invoice.status === 'failed' && (
-                                    <Button onClick={retry} disabled={processing}>
-                                        Retry
-                                    </Button>
-                                )}
-                            </div>
-                        </CardContent>
-                    </Card>
+
+                                <div className="flex gap-2 pt-4">
+                                    {hasPdf && (
+                                        <Button variant="outline" asChild>
+                                            <a href={route('invoices.download', [invoice.id, 'pdf'])}>Baixar PDF</a>
+                                        </Button>
+                                    )}
+                                    {hasXml && (
+                                        <Button variant="outline" asChild>
+                                            <a href={route('invoices.download', [invoice.id, 'xml'])}>Baixar XML</a>
+                                        </Button>
+                                    )}
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </div>
 
                     <Card>
                         <CardHeader>
-                            <CardTitle>Timeline</CardTitle>
+                            <CardTitle>Histórico</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <InvoiceTimeline events={invoice.events} />

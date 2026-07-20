@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Actions\Import\ParseImportChunkAction;
+use App\DTOs\CommissionRowDTO;
 use App\Models\Import;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
@@ -20,11 +21,9 @@ class ParseChunkJob implements ShouldQueue
     public string $queue = 'high';
 
     /**
-     * @param  \App\DTOs\CommissionRowDTO[]  $rows
+     * @param  CommissionRowDTO[]  $rows
      */
-    public function __construct(public readonly Import $import, public readonly array $rows)
-    {
-    }
+    public function __construct(public readonly Import $import, public readonly array $rows) {}
 
     public function backoff(): array
     {

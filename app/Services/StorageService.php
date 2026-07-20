@@ -13,6 +13,11 @@ class StorageService
         return $path;
     }
 
+    public function get(string $disk, string $path): ?string
+    {
+        return Storage::disk($disk)->get($path);
+    }
+
     public function temporaryUrl(string $disk, string $path, \DateTimeInterface $expiresAt): string
     {
         return Storage::disk($disk)->temporaryUrl($path, $expiresAt);

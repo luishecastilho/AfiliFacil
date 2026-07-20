@@ -22,7 +22,7 @@ class NullInvoiceProvider implements InvoiceProviderInterface
     {
         return [
             'invoice_number' => (string) random_int(100000, 999999),
-            'access_key' => Str::padLeft((string) $payload->invoiceId, 44, '0'),
+            'access_key' => Str::padLeft((string) $payload->invoiceId, 50, '0'),
             'reference' => (string) Str::uuid(),
             'raw' => [
                 'status' => 'generated',
@@ -30,5 +30,10 @@ class NullInvoiceProvider implements InvoiceProviderInterface
                 'amount' => $payload->amount,
             ],
         ];
+    }
+
+    public function baixarDanfse(string $accessKey, int $issuerId): ?string
+    {
+        return null;
     }
 }

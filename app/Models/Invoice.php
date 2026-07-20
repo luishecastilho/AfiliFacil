@@ -21,11 +21,18 @@ class Invoice extends Model
     protected $fillable = [
         'import_id',
         'seller_id',
+        'issuer_id',
         'status',
         'reference_month',
         'amount',
         'invoice_number',
         'access_key',
+        'dps_serie',
+        'dps_numero',
+        'service_code',
+        'iss_rate',
+        'iss_amount',
+        'ambiente',
         'issued_at',
         'provider',
         'provider_reference',
@@ -38,6 +45,8 @@ class Invoice extends Model
         return [
             'status' => InvoiceStatus::class,
             'amount' => 'decimal:2',
+            'iss_rate' => 'decimal:4',
+            'iss_amount' => 'decimal:2',
             'issued_at' => 'datetime',
             'provider_payload' => 'array',
         ];
@@ -51,6 +60,11 @@ class Invoice extends Model
     public function seller(): BelongsTo
     {
         return $this->belongsTo(Seller::class);
+    }
+
+    public function issuer(): BelongsTo
+    {
+        return $this->belongsTo(Issuer::class);
     }
 
     public function importRows(): BelongsToMany

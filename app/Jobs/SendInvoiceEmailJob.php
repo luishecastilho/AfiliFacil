@@ -19,9 +19,7 @@ class SendInvoiceEmailJob implements ShouldQueue
 
     public string $queue = 'low';
 
-    public function __construct(public readonly Invoice $invoice)
-    {
-    }
+    public function __construct(public readonly Invoice $invoice) {}
 
     public function backoff(): array
     {

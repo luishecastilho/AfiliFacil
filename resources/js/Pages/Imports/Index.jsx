@@ -1,6 +1,8 @@
 import AppLayout from '@/Layouts/AppLayout';
 import { Head, Link } from '@inertiajs/react';
+import { Upload } from 'lucide-react';
 import { Button } from '@/Components/ui/Button';
+import { EmptyState } from '@/Components/EmptyState';
 import { StatusBadge } from '@/Components/StatusBadge';
 import { Pagination } from '@/Components/Pagination';
 import { IMPORT_STATUS_LABELS } from '@/constants/statuses';
@@ -15,15 +17,33 @@ import {
 } from '@/Components/ui/Table';
 
 export default function Index({ imports }) {
+    if (imports.data.length === 0) {
+        return (
+            <AppLayout header={<h2 className="text-base font-semibold text-foreground">Importações</h2>}>
+                <Head title="Importações" />
+                <EmptyState
+                    icon={Upload}
+                    title="Nenhuma importação ainda"
+                    description="Envie o relatório de comissões da Shopee para a plataforma gerar suas notas fiscais automaticamente."
+                    action={
+                        <Button asChild>
+                            <Link href={route('imports.create')}>Importar relatório</Link>
+                        </Button>
+                    }
+                />
+            </AppLayout>
+        );
+    }
+
     return (
-        <AppLayout header={<h2 className="text-base font-semibold text-foreground">Imports</h2>}>
-            <Head title="Imports" />
+        <AppLayout header={<h2 className="text-base font-semibold text-foreground">Importações</h2>}>
+            <Head title="Importações" />
 
             <div className="space-y-4">
                 <div className="space-y-4">
                     <div className="flex justify-end">
                         <Button asChild>
-                            <Link href={route('imports.create')}>New Import</Link>
+                            <Link href={route('imports.create')}>Nova importação</Link>
                         </Button>
                     </div>
 
@@ -31,21 +51,14 @@ export default function Index({ imports }) {
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead>File</TableHead>
+                                    <TableHead>Arquivo</TableHead>
                                     <TableHead>Marketplace</TableHead>
                                     <TableHead>Status</TableHead>
-                                    <TableHead>Total Amount</TableHead>
-                                    <TableHead>Created</TableHead>
+                                    <TableHead>Valor total</TableHead>
+                                    <TableHead>Criado em</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {imports.data.length === 0 && (
-                                    <TableRow>
-                                        <TableCell colSpan={5} className="h-24 text-center">
-                                            No imports yet.
-                                        </TableCell>
-                                    </TableRow>
-                                )}
                                 {imports.data.map((item) => (
                                     <TableRow key={item.id}>
                                         <TableCell>

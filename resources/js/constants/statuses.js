@@ -1,32 +1,45 @@
 export const IMPORT_STATUS_LABELS = {
-    pending: 'Pending',
-    uploading: 'Uploading',
-    parsing: 'Parsing',
-    parsed: 'Parsed',
-    validating: 'Validating',
-    validated: 'Validated',
-    done: 'Done',
-    failed: 'Failed',
-    cancelled: 'Cancelled',
+    pending: 'Pendente',
+    uploading: 'Enviando',
+    parsing: 'Lendo arquivo',
+    parsed: 'Lido',
+    validating: 'Validando',
+    validated: 'Validado',
+    done: 'Concluído',
+    failed: 'Falhou',
+    cancelled: 'Cancelado',
 };
 
 export const IMPORT_ROW_STATUS_LABELS = {
-    pending: 'Pending',
-    valid: 'Valid',
-    invalid: 'Invalid',
-    duplicate: 'Duplicate',
-    queued: 'Queued',
-    invoiced: 'Invoiced',
-    failed: 'Failed',
+    pending: 'Pendente',
+    valid: 'Válida',
+    invalid: 'Inválida',
+    duplicate: 'Duplicada',
+    queued: 'Na fila',
+    invoiced: 'Emitida',
+    failed: 'Falhou',
 };
 
 export const INVOICE_STATUS_LABELS = {
-    queued: 'Queued',
-    processing: 'Processing',
-    generated: 'Generated',
-    failed: 'Failed',
-    cancelled: 'Cancelled',
-    retrying: 'Retrying',
+    queued: 'Na fila',
+    processing: 'Processando',
+    generated: 'Emitida',
+    failed: 'Falhou',
+    cancelled: 'Cancelada',
+    retrying: 'Repetindo',
+    awaiting_manual: 'Emitir manualmente',
+};
+
+export const INVOICE_EVENT_LABELS = {
+    queued: 'Na fila',
+    processing: 'Processando',
+    generated: 'Emitida',
+    failed: 'Falhou',
+    retried: 'Nova tentativa',
+    downloaded: 'Baixada',
+    cancelled: 'Cancelada',
+    awaiting_manual: 'Aguardando emissão manual',
+    emitted_manually: 'Emitida manualmente',
 };
 
 export const STATUS_BADGE_VARIANTS = {

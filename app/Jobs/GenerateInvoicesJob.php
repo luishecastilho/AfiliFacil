@@ -11,7 +11,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class GenerateInvoicesJob implements ShouldQueue, ShouldBeUnique
+class GenerateInvoicesJob implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -19,9 +19,7 @@ class GenerateInvoicesJob implements ShouldQueue, ShouldBeUnique
 
     public string $queue = 'default';
 
-    public function __construct(public readonly Import $import)
-    {
-    }
+    public function __construct(public readonly Import $import) {}
 
     public function uniqueId(): string
     {

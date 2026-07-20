@@ -6,6 +6,7 @@ namespace App\Models;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
@@ -31,6 +32,8 @@ class User extends Authenticatable
 
     protected $attributes = [
         'notification_preferences' => '{"email":true,"database":true}',
+        'plan' => 'free',
+        'nf_usage_this_month' => 0,
     ];
 
     /**
@@ -57,6 +60,11 @@ class User extends Authenticatable
             'password' => 'hashed',
             'notification_preferences' => 'array',
         ];
+    }
+
+    public function issuer(): HasOne
+    {
+        return $this->hasOne(Issuer::class);
     }
 
     public function imports(): HasMany

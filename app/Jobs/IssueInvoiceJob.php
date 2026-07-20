@@ -25,9 +25,7 @@ class IssueInvoiceJob implements ShouldQueue
 
     public string $queue = 'default';
 
-    public function __construct(public readonly Invoice $invoice)
-    {
-    }
+    public function __construct(public readonly Invoice $invoice) {}
 
     public function backoff(): array
     {
@@ -50,7 +48,9 @@ class IssueInvoiceJob implements ShouldQueue
             return;
         }
 
-        Redis::throttle('invoice-provider')->allow(10)->every(60)->then(
+        $issuerId = $this->invoice->import->user->issuer?->id ?? 0;
+
+        Redis::throttle('invoice-provider:'.$issuerId)->allow(10)->every(60)->then(
             function () use ($issueInvoiceAction, $subscriptionService, $user) {
                 $invoice = $issueInvoiceAction->handle($this->invoice);
 

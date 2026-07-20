@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Actions\Invoice\BuildInvoiceZipAction;
 use App\Models\Import;
+use App\Notifications\InvoicesGeneratedNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,7 +12,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class GenerateZipJob implements ShouldQueue, ShouldBeUnique
+class GenerateZipJob implements ShouldBeUnique, ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -19,9 +20,7 @@ class GenerateZipJob implements ShouldQueue, ShouldBeUnique
 
     public string $queue = 'low';
 
-    public function __construct(public readonly Import $import)
-    {
-    }
+    public function __construct(public readonly Import $import) {}
 
     public function uniqueId(): string
     {
@@ -37,6 +36,6 @@ class GenerateZipJob implements ShouldQueue, ShouldBeUnique
     {
         $zipFile = $buildInvoiceZipAction->handle($this->import);
 
-        $this->import->user->notify(new \App\Notifications\InvoicesGeneratedNotification($this->import, $zipFile));
+        $this->import->user->notify(new InvoicesGeneratedNotification($this->import, $zipFile));
     }
 }

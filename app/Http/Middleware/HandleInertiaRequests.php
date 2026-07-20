@@ -43,6 +43,11 @@ class HandleInertiaRequests extends Middleware
                 'limit' => $subscriptionService->nfLimit($user),
                 'plan' => $subscriptionService->currentPlan($user),
             ] : null,
+            'fiscal' => $user ? $subscriptionService->fiscalReady($user) : null,
+            'flash' => [
+                'status' => $request->session()->get('status'),
+                'warning' => $request->session()->get('warning'),
+            ],
         ];
     }
 }
