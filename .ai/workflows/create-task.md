@@ -101,14 +101,20 @@ source .env && curl -s -X POST https://api.linear.app/graphql \
   }' | python3 -m json.tool
 ```
 
-### Get a Specific Issue by Identifier
+### Get a Specific Issue by Number
+
+Replace `NN` with the issue number (e.g. for `LHC-224`, use `224`). Note: the `id` returned here
+is the issue UUID needed by the **Update Issue State** mutation below.
+
+> The old `issueSearch(query: ...)` query is **deprecated** by Linear — use the project + number
+> filter below instead.
 
 ```bash
 source .env && curl -s -X POST https://api.linear.app/graphql \
   -H "Content-Type: application/json" \
   -H "Authorization: $LINEAR_API_KEY" \
   -d '{
-    "query": "{ issueSearch(query: \"LHC-XX\", first: 1) { nodes { identifier title description state { name } priority priorityLabel labels { nodes { name } } url } } }"
+    "query": "{ project(id: \"08e76828-b9d8-4a9b-8432-41e9c378f5d8\") { issues(filter: { number: { eq: NN } }, first: 1) { nodes { id identifier title description state { name } priority priorityLabel labels { nodes { name } } url } } } }"
   }' | python3 -m json.tool
 ```
 
