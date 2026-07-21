@@ -86,7 +86,7 @@ export function Hero() {
                     </h1>
 
                     <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-neutral-400">
-                        Agora todo afiliado precisa emitir uma NFS-e para cada vendedor que pagou comissão extra — e
+                        Agora todo afiliado precisa emitir uma NFS-e para cada vendedor que pagou comissão extra, e
                         fazer isso na mão, uma por uma, leva horas todo mês. Com o AfiliFacil, você importa o
                         relatório da Shopee e o sistema gera todas as notas de uma vez. Rápido, fácil e automático.
                     </p>

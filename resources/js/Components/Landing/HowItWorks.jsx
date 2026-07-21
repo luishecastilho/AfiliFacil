@@ -13,7 +13,7 @@ const STEPS = [
     {
         title: 'Emissão em lote',
         description:
-            'Um clique e todas as NFS-e entram na fila de emissão automaticamente — uma nota por vendedor, sem você digitar nada.',
+            'Um clique e todas as NFS-e entram na fila de emissão automaticamente, uma nota por vendedor, sem você digitar nada.',
     },
     {
         title: 'Baixe tudo pronto',

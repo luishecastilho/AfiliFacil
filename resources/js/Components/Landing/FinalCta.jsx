@@ -17,7 +17,7 @@ export function FinalCta() {
                     <em className="font-serif font-normal italic text-[#EE4D2D]">1 clique</em>
                 </h2>
                 <p className="mx-auto mt-6 max-w-xl text-lg text-neutral-400">
-                    Crie sua conta gratuita, importe seu primeiro relatório e veja suas NFS-e sendo geradas —
+                    Crie sua conta gratuita, importe seu primeiro relatório e veja suas NFS-e sendo geradas,
                     sem cartão de crédito.
                 </p>
                 <div className="mt-12">

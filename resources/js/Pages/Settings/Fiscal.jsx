@@ -147,7 +147,7 @@ export default function Fiscal({ issuer, certificate, requirements, options }) {
         cepStatus === 'loading'
             ? 'Buscando endereço…'
             : cepStatus === 'error'
-              ? 'CEP não encontrado — preencha o endereço manualmente.'
+              ? 'CEP não encontrado, preencha o endereço manualmente.'
               : cepStatus === 'done'
                 ? 'Endereço preenchido automaticamente ✓'
                 : 'Digite o CEP para preencher o endereço automaticamente. Ex.: 01001-000';
@@ -283,7 +283,7 @@ export default function Fiscal({ issuer, certificate, requirements, options }) {
                         <CardHeader>
                             <CardTitle className="text-lg">Endereço</CardTitle>
                             <CardDescription>
-                                Comece pelo CEP — preenchemos o resto (inclusive o código do município) para você.
+                                Comece pelo CEP, preenchemos o resto (inclusive o código do município) para você.
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="grid gap-4 sm:grid-cols-2">
@@ -463,7 +463,7 @@ export default function Fiscal({ issuer, certificate, requirements, options }) {
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <Alert variant="info" title="O que é o certificado A1?">
-                                É um arquivo digital (.pfx ou .p12) — o e-CNPJ A1 — emitido por uma autoridade certificadora
+                                É um arquivo digital (.pfx ou .p12), o e-CNPJ A1, emitido por uma autoridade certificadora
                                 ICP-Brasil (ex.: Serasa, Certisign, Valid). Custa cerca de R$ 130–250 por ano. A senha é a que
                                 você definiu ao comprá-lo. Guardamos o arquivo de forma criptografada e nunca o exibimos de volta.
                             </Alert>

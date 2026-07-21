@@ -10,12 +10,12 @@ export const FAQ_ITEMS = [
     {
         question: 'O que é NFS-e?',
         answer:
-            'É a Nota Fiscal de Serviço eletrônica — o documento que formaliza um serviço prestado, como o de divulgação que o afiliado presta aos vendedores.',
+            'É a Nota Fiscal de Serviço eletrônica, o documento que formaliza um serviço prestado, como o de divulgação que o afiliado presta aos vendedores.',
     },
     {
         question: 'Preciso emitir uma nota para cada vendedor?',
         answer:
-            'Sim — é exatamente essa a dor que o AfiliFacil resolve: em vez de emitir uma a uma, você importa o relatório e o sistema gera uma NFS-e por vendedor, automaticamente.',
+            'Sim, é exatamente essa a dor que o AfiliFacil resolve: em vez de emitir uma a uma, você importa o relatório e o sistema gera uma NFS-e por vendedor, automaticamente.',
     },
     {
         question: 'Preciso ter CNPJ para usar o AfiliFacil?',
