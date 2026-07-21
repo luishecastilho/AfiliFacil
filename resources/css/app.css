@@ -134,6 +134,10 @@
         animation: float 6s ease-in-out 1s infinite alternate;
     }
 
+    .animate-float-sway {
+        animation: float-sway 6s ease-in-out infinite;
+    }
+
     @keyframes marquee {
         from {
             transform: translateX(0);
@@ -152,10 +156,23 @@
         }
     }
 
+    @keyframes float-sway {
+        0% {
+            transform: translateY(0) rotate(-2.5deg);
+        }
+        50% {
+            transform: translateY(-16px) rotate(2.5deg);
+        }
+        100% {
+            transform: translateY(0) rotate(-2.5deg);
+        }
+    }
+
     @media (prefers-reduced-motion: reduce) {
         .animate-marquee,
         .animate-float,
-        .animate-float-delayed {
+        .animate-float-delayed,
+        .animate-float-sway {
             animation: none;
         }
     }

@@ -22,7 +22,7 @@ const FORMAT_CHIPS = ['CSV', 'XLSX', 'XML', 'ZIP'];
 function NfseCard() {
     return (
         <div className="absolute -right-12 bottom-28 hidden rotate-6 lg:block xl:-right-20">
-            <div className="w-48 rounded-2xl bg-white p-4 shadow-2xl shadow-black/40 animate-float">
+            <div className="w-48 rounded-2xl bg-white p-4 shadow-2xl shadow-black/40 animate-float-sway">
                 <div className="flex items-center justify-between">
                     <span className="font-display text-xs font-bold tracking-wide text-neutral-900">NFS-e</span>
                     <span className="rounded-full bg-[#EE4D2D]/10 px-2 py-0.5 text-[10px] font-semibold text-[#EE4D2D] ring-1 ring-inset ring-[#EE4D2D]/30">
