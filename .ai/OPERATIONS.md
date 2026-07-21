@@ -267,6 +267,10 @@ Production requires a cron entry:
 
 ## Deployment
 
+> **Full production launch runbook:** [`.ai/DEPLOYMENT.md`](DEPLOYMENT.md) — an
+> end-to-end checklist (domain, Laravel Forge, S3, Horizon, gov.br/NFS-e, email,
+> Stripe). The section below is the condensed manual process.
+
 **Assumption:** No CI/CD, Dockerfile, or deployment scripts exist yet. Below is the recommended manual process.
 
 ### Production Checklist

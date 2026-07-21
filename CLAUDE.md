@@ -176,6 +176,7 @@ Public: `/` (Landing page), `/stripe/webhook`.
 | [`.ai/backlog.md`](.ai/backlog.md) | Pending tasks with priorities |
 | [`.ai/decisions.md`](.ai/decisions.md) | Architectural decisions and rationale |
 | [`.ai/OPERATIONS.md`](.ai/OPERATIONS.md) | Run, build, test, deploy |
+| [`.ai/DEPLOYMENT.md`](.ai/DEPLOYMENT.md) | Production launch runbook: domain, Forge, S3, Horizon, gov.br/NFS-e, email, Stripe |
 | [`.ai/roadmap.md`](.ai/roadmap.md) | Short and long-term goals |
 | [`.ai/workflows/create-task.md`](.ai/workflows/create-task.md) | How to create/retrieve tasks in Linear (AfiliFacil project) |
 | [`.ai/workflows/create-tests.md`](.ai/workflows/create-tests.md) | How to write and run tests |
