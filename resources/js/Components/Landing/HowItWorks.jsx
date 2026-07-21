@@ -4,23 +4,26 @@ import { CheckCircle2, Download, LayoutGrid, Upload } from 'lucide-react';
 const STEPS = [
     {
         icon: Upload,
-        title: 'Upload do relatório',
-        description: 'Baixe o relatório de comissões da Shopee e faça o upload em segundos.',
+        title: 'Importe seu relatório',
+        description: 'Baixe o relatório de comissões na sua conta Shopee e envie o arquivo (CSV) para o AfiliFacil.',
     },
     {
         icon: CheckCircle2,
         title: 'Validação automática',
-        description: 'O sistema valida os dados dos afiliados, detecta duplicatas e agrupa por CNPJ e mês de referência.',
+        description:
+            'O sistema confere os dados de cada vendedor, aponta erros antes da emissão e agrupa as comissões por vendedor e mês.',
     },
     {
         icon: LayoutGrid,
-        title: 'Geração em lote',
-        description: 'Com um clique, todas as NF-e são geradas automaticamente em fila, sem travar o sistema.',
+        title: 'Emissão em lote',
+        description:
+            'Um clique e todas as NFS-e entram na fila de emissão automaticamente — uma nota por vendedor, sem você digitar nada.',
     },
     {
         icon: Download,
-        title: 'Download pronto',
-        description: 'Baixe as notas individuais ou um ZIP com tudo de uma vez. Histórico sempre disponível.',
+        title: 'Baixe tudo pronto',
+        description:
+            'PDF e XML de cada nota, individual ou em um ZIP com tudo. Seu histórico fica salvo para consultar quando precisar.',
     },
 ];
 
@@ -29,11 +32,11 @@ export function HowItWorks() {
         <section id="como-funciona" className="bg-white py-24">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl text-center">
-                    <h2 id="funcionalidades" className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">
-                        Do relatório da Shopee à nota fiscal, em minutos
+                    <h2 className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">
+                        Do relatório da Shopee à nota fiscal emitida, em minutos
                     </h2>
                     <p className="mt-4 text-lg text-neutral-500">
-                        Um fluxo simples que elimina o trabalho manual de emitir centenas de notas fiscais todo mês.
+                        Um fluxo simples, pensado para quem nunca emitiu nota fiscal na vida.
                     </p>
                 </div>
 

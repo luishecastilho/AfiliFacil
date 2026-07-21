@@ -6,24 +6,24 @@ const PLANS = [
         key: 'free',
         name: 'Gratuito',
         price: 0,
-        limit: '5 NF-e por mês',
-        features: ['5 NF-e por mês', 'Upload de relatório Shopee', 'Download individual'],
+        limit: '5 NFS-e por mês',
+        features: ['5 NFS-e por mês', 'Upload de relatório Shopee', 'Download individual'],
         highlighted: false,
     },
     {
         key: 'basic',
         name: 'Básico',
         price: 39.9,
-        limit: '50 NF-e por mês',
-        features: ['50 NF-e por mês', 'Tudo do Gratuito', 'Download em ZIP', 'Suporte por email'],
+        limit: '50 NFS-e por mês',
+        features: ['50 NFS-e por mês', 'Tudo do Gratuito', 'Download em ZIP', 'Suporte por email'],
         highlighted: true,
     },
     {
         key: 'advanced',
         name: 'Avançado',
         price: 169.9,
-        limit: 'NF-e ilimitadas',
-        features: ['NF-e ilimitadas', 'Tudo do Básico', 'Processamento prioritário', 'Suporte prioritário'],
+        limit: 'NFS-e ilimitadas',
+        features: ['NFS-e ilimitadas', 'Tudo do Básico', 'Processamento prioritário', 'Suporte prioritário'],
         highlighted: false,
     },
 ];
@@ -100,10 +100,10 @@ export function Pricing() {
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl text-center">
                     <h2 className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">
-                        Planos para todo tamanho de operação
+                        Planos para todo tamanho de afiliado
                     </h2>
                     <p className="mt-4 text-lg text-neutral-500">
-                        Comece de graça e evolua conforme o volume de comissões da sua loja cresce.
+                        Comece de graça e mude de plano quando suas comissões crescerem.
                     </p>
                 </div>
 

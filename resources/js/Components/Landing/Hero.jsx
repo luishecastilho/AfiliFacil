@@ -27,13 +27,13 @@ export function Hero() {
                     </span>
 
                     <h1 className="mt-6 text-5xl font-extrabold tracking-tight text-white sm:text-6xl">
-                        Chega de emitir NF-e <span className="text-[#EE4D2D]">manualmente</span> para afiliados Shopee
+                        Todas as notas fiscais das suas comissões Shopee em <span className="text-[#EE4D2D]">1 clique</span>
                     </h1>
 
                     <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-neutral-400">
-                        Seus afiliados recebem comissões todo mês — e alguém precisa emitir uma nota fiscal para
-                        cada um deles. Para centenas de vendedores, isso são horas de trabalho manual repetitivo,
-                        todo santo mês. O AfiliFacil automatiza esse processo do início ao fim.
+                        Agora todo afiliado precisa emitir uma NFS-e para cada vendedor que pagou comissão extra — e
+                        fazer isso na mão, uma por uma, leva horas todo mês. Com o AfiliFacil, você importa o
+                        relatório da Shopee e o sistema gera todas as notas de uma vez. Rápido, fácil e automático.
                     </p>
 
                     <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
