@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Enums\ImportRowStatus;
 use App\Enums\ImportStatus;
-use App\Enums\InvoiceStatus;
+use App\Marketplace\Importers\ShopeeImporter;
 use App\Models\Import;
 use App\Models\ImportRow;
 use App\Models\Invoice;
@@ -22,13 +22,13 @@ class DevelopmentSeeder extends Seeder
     public function run(): void
     {
         $user = User::firstOrCreate(
-            ['email' => 'dev@nf-facilitator.test'],
+            ['email' => 'dev@afilifacil.test'],
             ['name' => 'Dev User', 'password' => bcrypt('password')],
         );
 
         $marketplace = Marketplace::firstOrCreate(
             ['slug' => 'shopee'],
-            ['name' => 'Shopee', 'importer_class' => \App\Marketplace\Importers\ShopeeImporter::class],
+            ['name' => 'Shopee', 'importer_class' => ShopeeImporter::class],
         );
 
         // Import #1: parsed but not yet validated.

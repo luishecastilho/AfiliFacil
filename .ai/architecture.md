@@ -1,6 +1,6 @@
 # Architecture
 
-NF-facilitator is a Laravel 12 + Inertia/React SaaS for automating NF-e invoice generation from marketplace commission reports.
+AfiliFacil is a Laravel 12 + Inertia/React SaaS for automating NF-e invoice generation from marketplace commission reports.
 
 ---
 
@@ -91,7 +91,7 @@ resources/js/
 
 | File | Purpose |
 |------|---------|
-| `config/nf-facilitator.php` | Chunk size (10k), max file size (50 MB), invoice retries, ZIP TTL (24h), presigned URL TTL (15 min) |
+| `config/afilifacil.php` | Chunk size (10k), max file size (50 MB), invoice retries, ZIP TTL (24h), presigned URL TTL (15 min) |
 | `config/plans.php` | SaaS tiers: free (5 NF), basic (50 NF), advanced (unlimited) |
 | `config/horizon.php` | Queue worker configuration |
 | `config/filesystems.php` | S3 disk (default `FILESYSTEM_DISK=s3`) |

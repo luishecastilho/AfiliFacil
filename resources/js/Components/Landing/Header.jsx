@@ -18,7 +18,7 @@ export function Header() {
                     <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#EE4D2D]/10 text-[#EE4D2D]">
                         <Zap className="h-5 w-5" />
                     </span>
-                    <span className="text-base font-semibold tracking-tight text-white">NF Facilitator</span>
+                    <span className="text-base font-semibold tracking-tight text-white">AfiliFacil</span>
                 </Link>
 
                 <div className="hidden items-center gap-8 md:flex">

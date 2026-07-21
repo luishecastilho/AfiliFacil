@@ -1,6 +1,6 @@
 # Affiliate Invoice Manager — Architectural Proposal
 
-**Project codename:** NF-facilitator  
+**Project codename:** AfiliFacil  
 **Stack:** Laravel 12 · PHP 8.4+ · React 19 (plain JS) · InertiaJS · MySQL · Redis  
 **Date:** 2026-07-18  
 **Status:** Analysis Phase — no code scaffolded yet
@@ -280,7 +280,7 @@ config/
     ├── filesystems.php             # S3 disk configured here
     ├── horizon.php
     ├── queue.php
-    └── nf-facilitator.php          # App-specific config (chunk size, rate limits, etc.)
+    └── afilifacil.php          # App-specific config (chunk size, rate limits, etc.)
 database/
     ├── factories/
     ├── migrations/
@@ -916,4 +916,4 @@ resources/
 
 ---
 
-*This document represents the full analysis and architectural design for NF-facilitator. Implementation should begin only after review and approval of the schema changes and workflow clarifications described in Section 1.*
+*This document represents the full analysis and architectural design for AfiliFacil. Implementation should begin only after review and approval of the schema changes and workflow clarifications described in Section 1.*

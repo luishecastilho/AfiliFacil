@@ -2,7 +2,7 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "nf-facilitator-dev",
+      "name": "afilifacil-dev",
       "runtimeExecutable": ".bin/composer",
       "runtimeArgs": ["run", "dev"],
       "port": 8000

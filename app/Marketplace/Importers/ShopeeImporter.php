@@ -21,7 +21,7 @@ class ShopeeImporter implements MarketplaceImporterInterface
 
     public function chunkSize(): int
     {
-        return config('nf-facilitator.import.chunk_size', self::DEFAULT_CHUNK_SIZE);
+        return config('afilifacil.import.chunk_size', self::DEFAULT_CHUNK_SIZE);
     }
 
     public function readChunks(string $absoluteFilePath): iterable

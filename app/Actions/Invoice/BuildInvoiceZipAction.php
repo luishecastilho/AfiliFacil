@@ -34,7 +34,7 @@ class BuildInvoiceZipAction
             'type' => InvoiceFileType::Zip,
             'disk' => 's3',
             'storage_path' => $path,
-            'expires_at' => now()->addHours(config('nf-facilitator.invoice.zip_ttl_hours')),
+            'expires_at' => now()->addHours(config('afilifacil.invoice.zip_ttl_hours')),
         ]);
     }
 }

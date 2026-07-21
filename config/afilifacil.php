@@ -3,16 +3,16 @@
 return [
 
     'import' => [
-        'chunk_size' => env('NF_IMPORT_CHUNK_SIZE', 10000),
-        'max_file_size_kb' => env('NF_IMPORT_MAX_FILE_SIZE_KB', 51200), // 50 MB
+        'chunk_size' => env('AFILIFACIL_IMPORT_CHUNK_SIZE', 10000),
+        'max_file_size_kb' => env('AFILIFACIL_IMPORT_MAX_FILE_SIZE_KB', 51200), // 50 MB
         'allowed_extensions' => ['csv', 'xlsx', 'xls'],
     ],
 
     'invoice' => [
-        'max_retries' => env('NF_INVOICE_MAX_RETRIES', 3),
-        'zip_ttl_hours' => env('NF_INVOICE_ZIP_TTL_HOURS', 24),
+        'max_retries' => env('AFILIFACIL_INVOICE_MAX_RETRIES', 3),
+        'zip_ttl_hours' => env('AFILIFACIL_INVOICE_ZIP_TTL_HOURS', 24),
         // Active invoice provider: 'null' (fake, dev/test) or 'nacional' (Padrão Nacional NFS-e).
-        'driver' => env('NF_INVOICE_DRIVER', 'null'),
+        'driver' => env('AFILIFACIL_INVOICE_DRIVER', 'null'),
     ],
 
     /*
@@ -20,7 +20,7 @@ return [
      | URLs verificadas em 2026-07 (ver .ai/nfse/pesquisa.md §2).
      */
     'nfse' => [
-        'ver_aplic' => env('NFSE_VER_APLIC', 'NF-facilitator-1.0'),
+        'ver_aplic' => env('NFSE_VER_APLIC', 'AfiliFacil-1.0'),
         'timeout' => env('NFSE_HTTP_TIMEOUT', 30),
 
         'endpoints' => [
@@ -43,7 +43,7 @@ return [
     ],
 
     'download' => [
-        'presigned_url_ttl_minutes' => env('NF_DOWNLOAD_URL_TTL_MINUTES', 15),
+        'presigned_url_ttl_minutes' => env('AFILIFACIL_DOWNLOAD_URL_TTL_MINUTES', 15),
     ],
 
 ];

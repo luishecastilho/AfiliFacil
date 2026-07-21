@@ -1,6 +1,6 @@
 # Workflow: Implement a Task
 
-Step-by-step guide for implementing any task in NF-facilitator.
+Step-by-step guide for implementing any task in AfiliFacil.
 
 ---
 
@@ -64,7 +64,7 @@ Before writing code, list the files you will create or modify:
 - [ ] **Event/Listener** — if side effects needed
 - [ ] **Observer** — if model lifecycle hooks needed
 - [ ] **Route** — in `routes/web.php`
-- [ ] **Config** — if new env vars in `config/nf-facilitator.php`
+- [ ] **Config** — if new env vars in `config/afilifacil.php`
 - [ ] **Seeder/Factory** — if new model needs test data
 
 ### Frontend Checklist

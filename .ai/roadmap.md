@@ -1,6 +1,6 @@
 # Roadmap
 
-Short and long-term goals for NF-facilitator.
+Short and long-term goals for AfiliFacil.
 
 ---
 
@@ -84,7 +84,7 @@ Goal: **Platform expansion and enterprise readiness.**
 
 ```mermaid
 gantt
-    title NF-facilitator Roadmap
+    title AfiliFacil Roadmap
     dateFormat YYYY-MM
     section ShortTerm
     RealNFProvider           :2026-07, 2026-08

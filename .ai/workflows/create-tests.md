@@ -1,6 +1,6 @@
 # Workflow: Create Tests
 
-Step-by-step guide for writing and running tests in NF-facilitator.
+Step-by-step guide for writing and running tests in AfiliFacil.
 
 ---
 

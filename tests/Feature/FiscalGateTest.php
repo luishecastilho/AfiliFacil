@@ -68,7 +68,7 @@ class FiscalGateTest extends TestCase
     public function test_portal_validation_stamps_issuer_on_success(): void
     {
         Storage::fake('s3');
-        config(['nf-facilitator.invoice.driver' => 'nacional']);
+        config(['afilifacil.invoice.driver' => 'nacional']);
         $user = User::factory()->create();
         $issuer = $this->attachCertificate(Issuer::factory()->for($user)->create());
 
@@ -86,7 +86,7 @@ class FiscalGateTest extends TestCase
     public function test_portal_validation_fails_for_non_adherent_municipality(): void
     {
         Storage::fake('s3');
-        config(['nf-facilitator.invoice.driver' => 'nacional']);
+        config(['afilifacil.invoice.driver' => 'nacional']);
         $user = User::factory()->create();
         $issuer = $this->attachCertificate(Issuer::factory()->for($user)->create());
 

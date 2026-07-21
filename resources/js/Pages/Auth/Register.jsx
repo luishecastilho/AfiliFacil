@@ -21,7 +21,7 @@ export default function Register() {
     };
 
     return (
-        <AuthLayout title="Create your account" description="Get started with NF-facilitator in minutes">
+        <AuthLayout title="Create your account" description="Get started with AfiliFacil in minutes">
             <Head title="Register" />
 
             <form onSubmit={submit} className="flex flex-col gap-5">

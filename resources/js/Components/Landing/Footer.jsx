@@ -8,10 +8,10 @@ export function Footer() {
                     <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[#EE4D2D]/10 text-[#EE4D2D]">
                         <Zap className="h-3.5 w-3.5" />
                     </span>
-                    <span className="text-sm font-medium text-neutral-600">NF Facilitator</span>
+                    <span className="text-sm font-medium text-neutral-600">AfiliFacil</span>
                 </div>
                 <p className="text-xs text-neutral-400">
-                    &copy; {new Date().getFullYear()} NF Facilitator. Todos os direitos reservados.
+                    &copy; {new Date().getFullYear()} AfiliFacil. Todos os direitos reservados.
                 </p>
             </div>
         </footer>

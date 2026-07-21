@@ -2,13 +2,14 @@
 
 namespace App\Http\Requests\Import;
 
+use App\Models\Import;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreImportRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return $this->user()->can('create', \App\Models\Import::class);
+        return $this->user()->can('create', Import::class);
     }
 
     public function rules(): array
@@ -19,7 +20,7 @@ class StoreImportRequest extends FormRequest
                 'required',
                 'file',
                 'mimes:csv,txt,xlsx,xls',
-                'max:'.config('nf-facilitator.import.max_file_size_kb'),
+                'max:'.config('afilifacil.import.max_file_size_kb'),
             ],
         ];
     }

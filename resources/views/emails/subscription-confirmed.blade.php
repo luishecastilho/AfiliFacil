@@ -18,7 +18,7 @@
                                             <span style="color:#EE4D2D; font-size:18px; line-height:32px;">&#9889;</span>
                                         </td>
                                         <td style="padding-left:10px; color:#ffffff; font-size:16px; font-weight:600;">
-                                            NF Facilitator
+                                            AfiliFacil
                                         </td>
                                     </tr>
                                 </table>
@@ -66,7 +66,7 @@
                         <tr>
                             <td style="padding:20px 32px; border-top:1px solid #e5e5e5;">
                                 <p style="margin:0; font-size:12px; color:#a3a3a3;">
-                                    &copy; {{ date('Y') }} NF Facilitator. Todos os direitos reservados.
+                                    &copy; {{ date('Y') }} AfiliFacil. Todos os direitos reservados.
                                 </p>
                             </td>
                         </tr>

@@ -1,6 +1,6 @@
 # Operations
 
-How to install, run, build, test, and deploy NF-facilitator.
+How to install, run, build, test, and deploy AfiliFacil.
 
 ---
 
@@ -21,8 +21,8 @@ How to install, run, build, test, and deploy NF-facilitator.
 
 ```bash
 # 1. Clone repository
-git clone <repo-url> nf-facilitator
-cd nf-facilitator
+git clone <repo-url> afilifacil
+cd afilifacil
 
 # 2. Install dependencies and bootstrap
 composer setup
@@ -46,13 +46,13 @@ php artisan db:seed    # includes DevelopmentSeeder in local env
 ### Required for Local Dev
 
 ```env
-APP_NAME="NF-facilitator"
+APP_NAME="AfiliFacil"
 APP_URL=http://localhost:8000
 
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=nf_facilitator
+DB_DATABASE=afilifacil
 DB_USERNAME=root
 DB_PASSWORD=
 
@@ -80,14 +80,14 @@ FILESYSTEM_DISK=local
 
 **Assumption:** Without S3 credentials, import upload and invoice file storage will fail. Use `FILESYSTEM_DISK=local` for local-only testing.
 
-### NF-facilitator Config
+### AfiliFacil Config
 
 ```env
-NF_IMPORT_CHUNK_SIZE=10000
-NF_IMPORT_MAX_FILE_SIZE_KB=51200       # 50 MB
-NF_INVOICE_MAX_RETRIES=3
-NF_INVOICE_ZIP_TTL_HOURS=24
-NF_DOWNLOAD_URL_TTL_MINUTES=15
+AFILIFACIL_IMPORT_CHUNK_SIZE=10000
+AFILIFACIL_IMPORT_MAX_FILE_SIZE_KB=51200       # 50 MB
+AFILIFACIL_INVOICE_MAX_RETRIES=3
+AFILIFACIL_INVOICE_ZIP_TTL_HOURS=24
+AFILIFACIL_DOWNLOAD_URL_TTL_MINUTES=15
 ```
 
 ### Stripe (Billing)
@@ -108,8 +108,8 @@ MAIL_HOST=
 MAIL_PORT=587
 MAIL_USERNAME=
 MAIL_PASSWORD=
-MAIL_FROM_ADDRESS=noreply@nffacilitator.com.br
-MAIL_FROM_NAME="NF Facilitator"
+MAIL_FROM_ADDRESS=noreply@afilifacil.com.br
+MAIL_FROM_NAME="AfiliFacil"
 ```
 
 ### Horizon
@@ -260,7 +260,7 @@ Defined in `routes/console.php`:
 Production requires a cron entry:
 
 ```cron
-* * * * * cd /path/to/nf-facilitator && php artisan schedule:run >> /dev/null 2>&1
+* * * * * cd /path/to/afilifacil && php artisan schedule:run >> /dev/null 2>&1
 ```
 
 ---
@@ -287,7 +287,7 @@ Production requires a cron entry:
 ```ini
 [program:nf-horizon]
 process_name=%(program_name)s
-command=php /path/to/nf-facilitator/artisan horizon
+command=php /path/to/afilifacil/artisan horizon
 autostart=true
 autorestart=true
 user=www-data

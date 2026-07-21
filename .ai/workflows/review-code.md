@@ -1,6 +1,6 @@
 # Workflow: Review Code
 
-Code review standards and checklist for NF-facilitator.
+Code review standards and checklist for AfiliFacil.
 
 ---
 
@@ -205,7 +205,7 @@ When reviewing changes in these areas, pay extra attention:
 | Billing | `SubscriptionService`, `BillingController`, `IssueInvoiceJob` (plan check) |
 | Auth/Access | `ImportPolicy`, `InvoicePolicy`, `SellerPolicy`, `BelongsToUserScope` |
 | Frontend pages | `Imports/Show.jsx`, `Invoices/Show.jsx`, `AppLayout.jsx` |
-| Config | `config/nf-facilitator.php`, `config/plans.php`, `.env.example` |
+| Config | `config/afilifacil.php`, `config/plans.php`, `.env.example` |
 
 ---
 

@@ -1,6 +1,6 @@
-# NF-facilitator — AI Entry Point
+# AfiliFacil — AI Entry Point
 
-**Project:** Affiliate Invoice Manager (codename: NF-facilitator)  
+**Project:** AfiliFacil — Affiliate Invoice Manager  
 **Purpose:** SaaS platform that automates Brazilian NF-e invoice generation from marketplace commission reports (Shopee first).
 
 > Start here. All deeper docs live under `.ai/`. The original design spec is in `ARCHITECTURE.md` (920 lines); this file reflects what is actually implemented in code.
@@ -70,7 +70,7 @@ resources/js/
 └── constants/        # statuses.js, routes.js
 
 config/
-├── nf-facilitator.php  # chunk_size, max_retries, zip TTL, presigned URL TTL
+├── afilifacil.php  # chunk_size, max_retries, zip TTL, presigned URL TTL
 └── plans.php           # free (5 NF), basic (50), advanced (unlimited)
 
 routes/web.php        # All app routes (auth, imports, invoices, billing, sellers)
@@ -110,7 +110,7 @@ php artisan horizon                    # production dashboard at /horizon
 
 **Prerequisites:** PHP 8.4+, Composer, Node 20+, MySQL 8, Redis, S3 credentials (or local disk override for dev).
 
-Copy `.env.example` → `.env` and configure: `DB_*`, `REDIS_*`, `AWS_*`, `STRIPE_*`, `NF_*`.
+Copy `.env.example` → `.env` and configure: `DB_*`, `REDIS_*`, `AWS_*`, `STRIPE_*`, `AFILIFACIL_*`.
 
 ---
 

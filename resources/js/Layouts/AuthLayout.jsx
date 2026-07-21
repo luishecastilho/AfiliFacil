@@ -10,7 +10,7 @@ export default function AuthLayout({ title, description, children }) {
                         <div className="flex size-6 items-center justify-center rounded-md bg-[#EE4D2D] text-white">
                             <Receipt className="size-4" />
                         </div>
-                        NF-facilitator
+                        AfiliFacil
                     </Link>
                 </div>
 
@@ -34,7 +34,7 @@ export default function AuthLayout({ title, description, children }) {
                 <div className="relative flex h-full flex-col justify-between p-12 text-white">
                     <div className="flex items-center gap-2 text-lg font-semibold">
                         <Receipt className="size-6" />
-                        NF-facilitator
+                        AfiliFacil
                     </div>
                     <div className="space-y-4">
                         <p className="text-3xl font-semibold leading-tight">

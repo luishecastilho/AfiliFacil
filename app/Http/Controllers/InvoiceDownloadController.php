@@ -24,7 +24,7 @@ class InvoiceDownloadController extends Controller
 
         InvoiceDownloaded::dispatch($invoice, $file);
 
-        $ttl = now()->addMinutes(config('nf-facilitator.download.presigned_url_ttl_minutes'));
+        $ttl = now()->addMinutes(config('afilifacil.download.presigned_url_ttl_minutes'));
         $url = Storage::disk($file->disk)->temporaryUrl($file->storage_path, $ttl);
 
         return redirect()->away($url);
@@ -43,7 +43,7 @@ class InvoiceDownloadController extends Controller
         if ($existing) {
             $url = Storage::disk($existing->disk)->temporaryUrl(
                 $existing->storage_path,
-                now()->addMinutes(config('nf-facilitator.download.presigned_url_ttl_minutes')),
+                now()->addMinutes(config('afilifacil.download.presigned_url_ttl_minutes')),
             );
 
             return redirect()->away($url);

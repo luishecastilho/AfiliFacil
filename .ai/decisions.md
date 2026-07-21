@@ -216,7 +216,7 @@ Decisions made during design and implementation. Each entry references the imple
 **Implementation:**
 - Upload: `StorageService::put('s3', $path, $contents)`
 - Download: `Storage::disk($file->disk)->temporaryUrl($path, $expiresAt)`
-- TTL: configurable via `config/nf-facilitator.php` (15 min default)
+- TTL: configurable via `config/afilifacil.php` (15 min default)
 - ZIP TTL: 24 hours (`expires_at` on `invoice_files`)
 - **Assumption:** Local dev may need `FILESYSTEM_DISK=local` if AWS credentials are unavailable.
 - **Files:** `app/Services/StorageService.php`, `app/Http/Controllers/InvoiceDownloadController.php`

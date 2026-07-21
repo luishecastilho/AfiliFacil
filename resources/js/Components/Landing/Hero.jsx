@@ -33,7 +33,7 @@ export function Hero() {
                     <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-neutral-400">
                         Seus afiliados recebem comissões todo mês — e alguém precisa emitir uma nota fiscal para
                         cada um deles. Para centenas de vendedores, isso são horas de trabalho manual repetitivo,
-                        todo santo mês. O NF Facilitator automatiza esse processo do início ao fim.
+                        todo santo mês. O AfiliFacil automatiza esse processo do início ao fim.
                     </p>
 
                     <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -58,7 +58,7 @@ export function Hero() {
                             <span className="h-3 w-3 rounded-full bg-red-500/60" />
                             <span className="h-3 w-3 rounded-full bg-yellow-500/60" />
                             <span className="h-3 w-3 rounded-full bg-[#EE4D2D]/60" />
-                            <span className="ml-3 text-xs text-neutral-500">nf-facilitator.app/imports/42</span>
+                            <span className="ml-3 text-xs text-neutral-500">afilifacil.app/imports/42</span>
                         </div>
 
                         <div className="overflow-x-auto">

@@ -16,7 +16,7 @@ Nem todo usuário tem certificado A1. O Tier B oferece uma alternativa **assisti
 - Colunas gov.br já na tabela `issuers` (migration `create_issuers_table`): `govbr_sub`, `govbr_cpf`, `govbr_linked_at`; e helper `Issuer::isGovbrLinked()`.
 - Gate já é tier-aware: `SubscriptionService::fiscalReady()` já trata `emission_mode = manual` exigindo `govbr_linked_at` (hoje o único item faltante para "completo" no modo manual).
 - Página `Settings/Fiscal.jsx` já tem o seletor de modo e um item de checklist "Conta gov.br conectada (modo manual)" (placeholder, sem ação).
-- Config `nf-facilitator.nfse.emissor_nacional_url` já definida (deep-link do Emissor Nacional).
+- Config `afilifacil.nfse.emissor_nacional_url` já definida (deep-link do Emissor Nacional).
 
 ## Escopo a implementar (quando ativarmos)
 

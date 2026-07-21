@@ -1,4 +1,4 @@
-# NF-facilitator
+# AfiliFacil
 
 **Affiliate Invoice Manager** — SaaS platform that automates Brazilian NF-e invoice generation from marketplace commission reports.
 

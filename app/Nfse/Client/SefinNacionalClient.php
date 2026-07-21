@@ -63,7 +63,7 @@ class SefinNacionalClient
     private function send(Issuer $issuer, Closure $callback): Response
     {
         return $this->vault->withTempPem($issuer, function (string $certFile, string $keyFile) use ($callback): Response {
-            $request = Http::timeout((int) config('nf-facilitator.nfse.timeout', 30))
+            $request = Http::timeout((int) config('afilifacil.nfse.timeout', 30))
                 ->withOptions(['cert' => $certFile, 'ssl_key' => $keyFile])
                 ->acceptJson();
 
@@ -78,6 +78,6 @@ class SefinNacionalClient
     {
         $env = $issuer->ambiente === AmbienteEmissao::Producao ? 'producao' : 'producao_restrita';
 
-        return config('nf-facilitator.nfse.endpoints.'.$env);
+        return config('afilifacil.nfse.endpoints.'.$env);
     }
 }

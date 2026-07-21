@@ -35,7 +35,7 @@ class NacionalNfseProviderTest extends TestCase
     private function makeIssuerWithCertificate(): Issuer
     {
         Storage::fake('s3');
-        config(['nf-facilitator.invoice.driver' => 'nacional']);
+        config(['afilifacil.invoice.driver' => 'nacional']);
 
         $issuer = Issuer::factory()->for(User::factory())->create();
 
@@ -44,7 +44,7 @@ class NacionalNfseProviderTest extends TestCase
 
     public function test_driver_binding_resolves_national_provider(): void
     {
-        config(['nf-facilitator.invoice.driver' => 'nacional']);
+        config(['afilifacil.invoice.driver' => 'nacional']);
 
         $this->assertInstanceOf(NacionalNfseProvider::class, app(InvoiceProviderInterface::class));
     }
