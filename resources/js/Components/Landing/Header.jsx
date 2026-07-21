@@ -5,10 +5,10 @@ import { Menu, X } from 'lucide-react';
 import { Logo } from '@/Components/Logo';
 
 const NAV_LINKS = [
-    { href: '#como-funciona', label: 'Como funciona' },
-    { href: '#funcionalidades', label: 'Funcionalidades' },
-    { href: '#planos', label: 'Planos' },
-    { href: '#duvidas', label: 'Dúvidas' },
+    { href: '/#como-funciona', label: 'Como funciona' },
+    { href: '/#funcionalidades', label: 'Funcionalidades' },
+    { href: '/#planos', label: 'Planos' },
+    { href: '/#duvidas', label: 'Dúvidas' },
 ];
 
 export function Header() {

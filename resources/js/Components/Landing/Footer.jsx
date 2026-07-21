@@ -1,10 +1,11 @@
+import { Link } from '@inertiajs/react';
 import { Logo } from '@/Components/Logo';
 
-const FOOTER_LINKS = [
-    { href: '#como-funciona', label: 'Como funciona' },
-    { href: '#funcionalidades', label: 'Funcionalidades' },
-    { href: '#planos', label: 'Planos' },
-    { href: '#duvidas', label: 'Dúvidas' },
+const SECTION_LINKS = [
+    { href: '/#como-funciona', label: 'Como funciona' },
+    { href: '/#funcionalidades', label: 'Funcionalidades' },
+    { href: '/#planos', label: 'Planos' },
+    { href: '/#duvidas', label: 'Dúvidas' },
 ];
 
 export function Footer() {
@@ -22,11 +23,17 @@ export function Footer() {
                 </div>
 
                 <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-                    {FOOTER_LINKS.map((link) => (
+                    {SECTION_LINKS.map((link) => (
                         <a key={link.href} href={link.href} className="text-xs text-neutral-500 transition hover:text-neutral-900">
                             {link.label}
                         </a>
                     ))}
+                    <Link href={route('terms')} className="text-xs text-neutral-500 transition hover:text-neutral-900">
+                        Termos de Uso
+                    </Link>
+                    <Link href={route('privacy')} className="text-xs text-neutral-500 transition hover:text-neutral-900">
+                        Privacidade
+                    </Link>
                 </nav>
 
                 <p className="text-xs text-neutral-400">

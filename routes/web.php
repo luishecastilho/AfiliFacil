@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', fn () => Inertia::render('Landing'))->name('landing');
+Route::get('/termos', fn () => Inertia::render('Legal/Terms'))->name('terms');
+Route::get('/privacidade', fn () => Inertia::render('Legal/Privacy'))->name('privacy');
 
 Route::post('/stripe/webhook', [StripeWebhookController::class, 'handleWebhook'])->name('cashier.webhook');
 
