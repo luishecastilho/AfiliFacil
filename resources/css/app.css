@@ -72,3 +72,108 @@
         @apply bg-background text-foreground;
     }
 }
+
+@layer components {
+    .legal-prose {
+        @apply text-base leading-relaxed text-neutral-600;
+    }
+
+    .legal-prose > section + section {
+        @apply mt-10;
+    }
+
+    .legal-prose h2 {
+        @apply mb-3 font-display text-2xl font-bold tracking-tight text-neutral-900;
+    }
+
+    .legal-prose h3 {
+        @apply mb-2 mt-6 font-display text-lg font-bold text-neutral-900;
+    }
+
+    .legal-prose p {
+        @apply mb-4;
+    }
+
+    .legal-prose ul {
+        @apply mb-4 list-disc space-y-2 pl-6 marker:text-[#EE4D2D];
+    }
+
+    .legal-prose li {
+        @apply pl-1;
+    }
+
+    .legal-prose a {
+        @apply font-medium text-[#EE4D2D] underline-offset-2 hover:underline;
+    }
+
+    .legal-prose strong {
+        @apply font-semibold text-neutral-900;
+    }
+
+    .legal-prose p:last-child,
+    .legal-prose ul:last-child {
+        @apply mb-0;
+    }
+}
+
+@layer utilities {
+    .text-stroke {
+        -webkit-text-stroke: 1px currentColor;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .animate-marquee {
+        animation: marquee 30s linear infinite;
+    }
+
+    .animate-float {
+        animation: float 5s ease-in-out infinite alternate;
+    }
+
+    .animate-float-delayed {
+        animation: float 6s ease-in-out 1s infinite alternate;
+    }
+
+    .animate-float-sway {
+        animation: float-sway 6s ease-in-out infinite;
+    }
+
+    @keyframes marquee {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(-50%);
+        }
+    }
+
+    @keyframes float {
+        from {
+            transform: translateY(0);
+        }
+        to {
+            transform: translateY(-10px);
+        }
+    }
+
+    @keyframes float-sway {
+        0% {
+            transform: translateY(0) rotate(-2.5deg);
+        }
+        50% {
+            transform: translateY(-16px) rotate(2.5deg);
+        }
+        100% {
+            transform: translateY(0) rotate(-2.5deg);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .animate-marquee,
+        .animate-float,
+        .animate-float-delayed,
+        .animate-float-sway {
+            animation: none;
+        }
+    }
+}
