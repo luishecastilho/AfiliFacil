@@ -1,4 +1,6 @@
 <?php
+echo 'Still in development mode';
+exit;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
