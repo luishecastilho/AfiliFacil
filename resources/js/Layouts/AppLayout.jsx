@@ -1,5 +1,6 @@
 import { AppSidebar } from '@/Components/App/AppSidebar';
 import { FiscalReadinessBanner } from '@/Components/App/FiscalReadinessBanner';
+import { FreeTierBanner } from '@/Components/App/FreeTierBanner';
 import { FlashMessages } from '@/Components/FlashMessages';
 import { Separator } from '@/Components/ui/Separator';
 import {
@@ -26,6 +27,7 @@ export default function AppLayout({ header, children }) {
                     <main className="flex flex-1 flex-col gap-4 p-4 md:p-6">
                         <FlashMessages />
                         <FiscalReadinessBanner />
+                        <FreeTierBanner />
                         {children}
                     </main>
                 </SidebarInset>

@@ -2,8 +2,10 @@ import AppLayout from '@/Layouts/AppLayout';
 import { Head, router, useForm } from '@inertiajs/react';
 import { useState } from 'react';
 import { Alert } from '@/Components/ui/Alert';
+import { UpgradePrompt } from '@/Components/App/UpgradePrompt';
 import { Button } from '@/Components/ui/Button';
 import { SummaryCard } from '@/Components/SummaryCard';
+import { useFreeTierStatus } from '@/hooks/useFreeTierStatus';
 import { StatusBadge } from '@/Components/StatusBadge';
 import { Pagination } from '@/Components/Pagination';
 import { ProgressBar } from '@/Components/ProgressBar';
@@ -38,6 +40,11 @@ export default function Show({ import: importRecord, rows }) {
         post(route('invoices.generate', importRecord.id));
     }
 
+    const freeTier = useFreeTierStatus();
+    const uniqueAffiliates = importRecord.total_unique_tax_ids ?? 0;
+    const exceedsQuota =
+        freeTier.isFree && importRecord.status === 'validated' && uniqueAffiliates > freeTier.remaining;
+
     const totalInvoices = Object.values(progress).reduce((sum, count) => sum + count, 0);
     const generatedInvoices = progress.generated ?? 0;
 
@@ -68,6 +75,16 @@ export default function Show({ import: importRecord, rows }) {
                             </a>
                         )}
                     </div>
+
+                    {exceedsQuota && (
+                        <UpgradePrompt
+                            variant="warning"
+                            title="Esta importação ultrapassa o limite do plano Gratuito"
+                        >
+                            Ela gera {uniqueAffiliates} notas, mas seu plano permite apenas mais {freeTier.remaining}{' '}
+                            este mês. As notas excedentes falharão — faça upgrade para emitir todas de uma vez.
+                        </UpgradePrompt>
+                    )}
 
                     {totalInvoices > 0 && (
                         <div className="space-y-2 rounded-md border bg-white p-4">
