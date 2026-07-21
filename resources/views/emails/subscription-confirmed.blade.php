@@ -14,8 +14,8 @@
                             <td style="background-color:#0a0a0a; padding:24px 32px;">
                                 <table role="presentation" cellpadding="0" cellspacing="0">
                                     <tr>
-                                        <td style="background-color:rgba(238,77,45,0.15); border-radius:8px; width:32px; height:32px; text-align:center; vertical-align:middle;">
-                                            <span style="color:#EE4D2D; font-size:18px; line-height:32px;">&#9889;</span>
+                                        <td style="background-color:#ffffff; border-radius:8px; width:36px; height:36px; text-align:center; vertical-align:middle;">
+                                            <img src="{{ asset('logo.png') }}" width="28" height="28" alt="AfiliFacil" style="display:block; margin:4px auto; border:0;">
                                         </td>
                                         <td style="padding-left:10px; color:#ffffff; font-size:16px; font-weight:600;">
                                             AfiliFacil

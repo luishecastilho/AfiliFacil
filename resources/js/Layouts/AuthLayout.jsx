@@ -1,5 +1,6 @@
 import { Link } from '@inertiajs/react';
-import { Receipt } from 'lucide-react';
+
+import { Logo } from '@/Components/Logo';
 
 export default function AuthLayout({ title, description, children }) {
     return (
@@ -7,9 +8,7 @@ export default function AuthLayout({ title, description, children }) {
             <div className="flex flex-col gap-4 p-6 md:p-10">
                 <div className="flex justify-center gap-2 md:justify-start">
                     <Link href="/" className="flex items-center gap-2 font-medium">
-                        <div className="flex size-6 items-center justify-center rounded-md bg-[#EE4D2D] text-white">
-                            <Receipt className="size-4" />
-                        </div>
+                        <Logo size={24} plate={false} />
                         AfiliFacil
                     </Link>
                 </div>
@@ -33,7 +32,7 @@ export default function AuthLayout({ title, description, children }) {
                 <div className="absolute inset-0 bg-gradient-to-br from-[#EE4D2D] via-[#e6431f] to-[#c9381a]" />
                 <div className="relative flex h-full flex-col justify-between p-12 text-white">
                     <div className="flex items-center gap-2 text-lg font-semibold">
-                        <Receipt className="size-6" />
+                        <Logo size={28} rounded="rounded-md" />
                         AfiliFacil
                     </div>
                     <div className="space-y-4">

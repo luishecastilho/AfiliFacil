@@ -4,7 +4,6 @@ import {
     FileText,
     LayoutDashboard,
     LogOut,
-    Receipt,
     ShieldCheck,
     Upload,
     User,
@@ -12,6 +11,7 @@ import {
     ChevronsUpDown,
 } from 'lucide-react';
 
+import { Logo } from '@/Components/Logo';
 import { NfUsageMeter } from '@/Components/App/NfUsageMeter';
 import { Avatar, AvatarFallback } from '@/Components/ui/Avatar';
 import {
@@ -69,9 +69,7 @@ export function AppSidebar() {
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
                             <Link href="/" onClick={() => setOpenMobile(false)}>
-                                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-[#EE4D2D] text-white">
-                                    <Receipt className="size-4" />
-                                </div>
+                                <Logo size={32} rounded="rounded-lg" />
                                 <div className="grid flex-1 text-left text-sm leading-tight">
                                     <span className="truncate font-semibold">AfiliFacil</span>
                                     <span className="truncate text-xs text-muted-foreground">Notas de afiliados</span>

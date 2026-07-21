@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from '@inertiajs/react';
-import { Menu, X, Zap } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+
+import { Logo } from '@/Components/Logo';
 
 const NAV_LINKS = [
     { href: '#como-funciona', label: 'Como funciona' },
@@ -15,9 +17,7 @@ export function Header() {
         <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0a0a0a]/80 backdrop-blur-md">
             <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
                 <Link href="/" className="flex items-center gap-2">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#EE4D2D]/10 text-[#EE4D2D]">
-                        <Zap className="h-5 w-5" />
-                    </span>
+                    <Logo size={32} rounded="rounded-lg" />
                     <span className="text-base font-semibold tracking-tight text-white">AfiliFacil</span>
                 </Link>
 
