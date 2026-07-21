@@ -25,6 +25,16 @@ export default {
     			sans: [
     				'Figtree',
                     ...defaultTheme.fontFamily.sans
+                ],
+    			display: [
+    				'Space Grotesk',
+                    ...defaultTheme.fontFamily.sans
+                ],
+    			serif: [
+    				'Instrument Serif',
+    				'ui-serif',
+    				'Georgia',
+    				'serif'
                 ]
     		},
     		colors: {

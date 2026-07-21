@@ -1,6 +1,7 @@
 import { Head } from '@inertiajs/react';
 import { Header } from '@/Components/Landing/Header';
 import { Hero } from '@/Components/Landing/Hero';
+import { Marquee } from '@/Components/Landing/Marquee';
 import { Problem } from '@/Components/Landing/Problem';
 import { HowItWorks } from '@/Components/Landing/HowItWorks';
 import { Features } from '@/Components/Landing/Features';
@@ -37,7 +38,8 @@ export default function Landing() {
                 <meta name="twitter:description" content={META_DESCRIPTION} />
                 <link rel="canonical" href="https://afilifacil.com.br" />
                 <meta property="og:url" content="https://afilifacil.com.br" />
-                {/* NEEDS INPUT: og:image (imagem de compartilhamento social) */}
+                <meta property="og:image" content="https://afilifacil.com.br/og-image.png" />
+                <meta name="twitter:image" content="https://afilifacil.com.br/og-image.png" />
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}
@@ -47,6 +49,7 @@ export default function Landing() {
             <div className="bg-white font-sans text-neutral-900 antialiased">
                 <Header />
                 <Hero />
+                <Marquee />
                 <Problem />
                 <HowItWorks />
                 <Features />

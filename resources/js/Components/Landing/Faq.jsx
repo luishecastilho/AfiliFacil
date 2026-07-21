@@ -40,25 +40,21 @@ export const FAQ_ITEMS = [
 
 export function Faq() {
     return (
-        <section id="duvidas" className="bg-neutral-50 py-24">
+        <section id="duvidas" className="bg-white py-24 lg:py-32">
             <div className="mx-auto max-w-3xl px-6 lg:px-8">
-                <div className="text-center">
-                    <h2 className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">
-                        Dúvidas frequentes de afiliados Shopee
-                    </h2>
-                </div>
+                <h2 className="font-display text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl">
+                    <em className="font-serif font-normal italic text-[#EE4D2D]">Dúvidas</em> frequentes de afiliados
+                    Shopee
+                </h2>
 
-                <div className="mt-12 space-y-4">
+                <div className="mt-12 border-t border-neutral-200">
                     {FAQ_ITEMS.map((item) => (
-                        <details
-                            key={item.question}
-                            className="group rounded-2xl border border-neutral-200 bg-white p-6"
-                        >
-                            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 [&::-webkit-details-marker]:hidden">
-                                <h3 className="text-base font-semibold text-neutral-900">{item.question}</h3>
-                                <ChevronDown className="h-5 w-5 shrink-0 text-neutral-400 transition group-open:rotate-180" />
+                        <details key={item.question} className="group border-b border-neutral-200">
+                            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-6 [&::-webkit-details-marker]:hidden">
+                                <h3 className="font-display text-lg font-bold text-neutral-900">{item.question}</h3>
+                                <ChevronDown className="h-5 w-5 shrink-0 text-[#EE4D2D] transition group-open:rotate-180" />
                             </summary>
-                            <p className="mt-3 text-sm leading-relaxed text-neutral-500">{item.answer}</p>
+                            <p className="pb-6 text-base leading-relaxed text-neutral-500">{item.answer}</p>
                         </details>
                     ))}
                 </div>
