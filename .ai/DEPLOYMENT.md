@@ -298,24 +298,37 @@ NFSE_VER_APLIC=AfiliFacil-1.0
 NFSE_HTTP_TIMEOUT=30
 ```
 
-### 8.2 Prove one real emission before trusting it
+### 8.2 Prove it end-to-end with one real pilot (your wife)
 
-- [ ] Obtain a **test e-CNPJ A1** and **produção restrita** access via gov.br
-      (see [.ai/nfse/pesquisa.md](nfse/pesquisa.md) §2). No platform key exists —
-      this is per-CNPJ, per-certificate.
-- [ ] Complete a test Issuer's fiscal profile — `fiscalReady()` requires
-      `legal_name`, valid `tax_document` (CNPJ, modulo-11), `address_ibge_code`,
-      `service_code` (`cTribNac`, e.g. LC 116 **10.05** for intermediação —
-      confirm with an accountant), `regime_tributario`; for
-      `emission_mode=Automated` also a valid **certificate** + **portal validation**.
-- [ ] Set that Issuer's `ambiente` to **produção restrita** and issue one invoice
-      end-to-end (build DPS → sign → mTLS → chave de acesso). This is the real
-      proof the DPS passes XSD + municipal rules — **zero legal effect**.
-- [ ] Confirm the destination município is live on the Padrão Nacional
-      (`SefinNacionalClient::consultarParametros` succeeds for its IBGE code).
-- [ ] Only then set real users' Issuer `ambiente` to **produção**. A production
-      NFS-e is a legally valid fiscal document (ISS due; cancelamento has
-      municipal deadlines — see [.ai/nfse/pesquisa.md](nfse/pesquisa.md) §13).
+There is **one** validation path, and the pilot *is* the proof — you do not run a
+separate synthetic test. Use **one real MEI affiliate you control** (your wife,
+with real Shopee commissions) and walk these steps in order. Steps 1–5 happen in
+**produção restrita** (zero legal effect); only step 6 issues a real note.
+
+1. [ ] **Get access + certificate.** Create **produção restrita** access via
+       gov.br and have her **real e-CNPJ A1** (`.pfx` + password) on hand. No
+       separate "test" cert is needed — a real cert in restrita has zero legal
+       effect. No platform key exists; it's per-CNPJ ([pesquisa.md](nfse/pesquisa.md) §2).
+2. [ ] **Complete her Issuer fiscal profile** in `Settings/Fiscal` — `fiscalReady()`
+       requires all of: `legal_name`, valid `tax_document` (CNPJ, modulo-11),
+       `address_ibge_code`, `service_code` (`cTribNac`, e.g. LC 116 **10.05** for
+       intermediação — **confirm with an accountant**), `regime_tributario`.
+3. [ ] **Upload the A1 + validate** — set `emission_mode=Automated`, upload the
+       `.pfx`, and run **portal validation** (must pass before emission is allowed).
+4. [ ] **Confirm her município is live** on the Padrão Nacional
+       (`SefinNacionalClient::consultarParametros` succeeds for her IBGE code).
+5. [ ] **Restrita dry run — the proof.** Set her Issuer `ambiente` to **produção
+       restrita** and issue from a real import end-to-end (build DPS → sign → mTLS
+       → chave de acesso). Confirm the **DANFSE PDF** downloads and the authorized
+       **XML lands in S3**. This validates the real cert + município + service_code
+       combo with **no fiscal effect**. Fix any rejection here, not in produção.
+6. [ ] **One controlled produção emission.** Only after step 5 is clean, flip her
+       `ambiente` to **produção** and issue a **single** note tied to a genuine
+       commission. Keep it if legitimate, or **cancel within the município's
+       window** ([pesquisa.md](nfse/pesquisa.md) §13). Never do a throwaway "test"
+       in produção — it is a real, legally valid tax document (ISS due).
+7. [ ] **Green → open signups.** With steps 5–6 passing, the flow is proven;
+       real customers can now onboard (each repeats steps 1–3 for their own CNPJ).
 
 **Per-user (runtime, not deploy):** each customer uploads their A1 e-CNPJ
 certificate + password and completes their fiscal profile in `Settings/Fiscal`;
