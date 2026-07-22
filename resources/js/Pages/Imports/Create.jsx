@@ -1,9 +1,11 @@
 import AppLayout from '@/Layouts/AppLayout';
 import { Head, useForm } from '@inertiajs/react';
 import { FileUploadZone } from '@/Components/FileUploadZone';
+import { UpgradePrompt } from '@/Components/App/UpgradePrompt';
 import { Alert } from '@/Components/ui/Alert';
 import { Button } from '@/Components/ui/Button';
 import { Label } from '@/Components/ui/Label';
+import { useFreeTierStatus } from '@/hooks/useFreeTierStatus';
 import {
     Select,
     SelectContent,
@@ -18,6 +20,8 @@ export default function Create({ marketplaces }) {
         file: null,
     });
 
+    const freeTier = useFreeTierStatus();
+
     function submit(event) {
         event.preventDefault();
         post(route('imports.store'), { forceFormData: true });
@@ -29,6 +33,21 @@ export default function Create({ marketplaces }) {
 
             <div className="space-y-4">
                 <div className="mx-auto max-w-2xl space-y-4 sm:px-6 lg:px-8">
+                    {freeTier.showNudge && (
+                        <UpgradePrompt
+                            variant={freeTier.atLimit ? 'warning' : 'info'}
+                            title={
+                                freeTier.atLimit
+                                    ? 'Você atingiu o limite de notas deste mês'
+                                    : `Você tem ${freeTier.remaining} nota(s) grátis restante(s) este mês`
+                            }
+                        >
+                            {freeTier.atLimit
+                                ? 'As notas desta importação não serão emitidas no plano Gratuito até o próximo mês. Faça upgrade para emitir todas agora.'
+                                : 'Se esta importação tiver mais afiliados que o limite, as notas excedentes não serão emitidas. Faça upgrade para emitir todas.'}
+                        </UpgradePrompt>
+                    )}
+
                     <Alert variant="info" title="Qual arquivo enviar?">
                         Envie o <strong>relatório de comissões</strong> exportado do painel da Shopee (menu Afiliados →
                         Comissões → Exportar). Aceitamos arquivos <strong>CSV, XLSX ou XLS</strong>. A plataforma lê o

@@ -2,8 +2,10 @@ import AppLayout from '@/Layouts/AppLayout';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { CreditCard, FileText, Receipt, Upload, Users } from 'lucide-react';
 import { OnboardingChecklist } from '@/Components/App/OnboardingChecklist';
+import { UpgradePrompt } from '@/Components/App/UpgradePrompt';
 import { Button } from '@/Components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/Components/ui/Card';
+import { useFreeTierStatus } from '@/hooks/useFreeTierStatus';
 
 function StatCard({ title, value, hint, icon: Icon }) {
     return (
@@ -22,6 +24,7 @@ function StatCard({ title, value, hint, icon: Icon }) {
 
 export default function Index({ summary }) {
     const { nf_usage: usage, fiscal } = usePage().props;
+    const freeTier = useFreeTierStatus();
 
     const usageLabel = usage
         ? usage.limit === null
@@ -90,6 +93,17 @@ export default function Index({ summary }) {
                     </Button>
                 </CardContent>
             </Card>
+
+            {freeTier.isFree && (
+                <UpgradePrompt
+                    variant={freeTier.atLimit ? 'warning' : 'info'}
+                    title="Você está no plano Gratuito"
+                >
+                    {freeTier.atLimit
+                        ? `Você já usou as ${freeTier.limit} notas grátis deste mês. Faça upgrade para continuar emitindo agora.`
+                        : `Seu plano inclui ${freeTier.limit} notas por mês (${freeTier.used} usadas). Faça upgrade para emitir muito mais e desbloquear planos maiores.`}
+                </UpgradePrompt>
+            )}
         </AppLayout>
     );
 }
