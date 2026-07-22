@@ -13,25 +13,26 @@ production SaaS. Follow it top to bottom on the first deploy; use the
 
 ---
 
-## 0. Pre-flight — accounts you must own before starting
+## 0. [ ] Pre-flight — accounts you must own before starting
 
 Provision these first; several later steps block on their credentials.
 
-- [ ] **Domain** registered (e.g. `afilifacil.com.br`) with DNS you control
-- [ ] **Server / hosting** — Laravel Forge account + a connected cloud provider
+- [X] **Domain** registered (e.g. `afilifacil.com.br`) with DNS you control
+- [X] **Server / hosting** — Laravel Forge account + a connected cloud provider
       (DigitalOcean, Hetzner, AWS EC2, …)
-- [ ] **AWS account** — for the S3 bucket (imports, invoice PDFs/XMLs, ZIPs)
-- [ ] **Stripe account** — live mode enabled, business verified for payouts
-- [ ] **Transactional email provider** (Amazon SES, Postmark, Mailgun, Resend…)
-- [ ] **gov.br / NFS-e access** — see [§8](#8-gov-nfs-e-fiscal-config). Not
-      required to launch the marketing site + billing; **required before real
-      invoices can be issued.**
+- [X] **AWS account** — for the S3 bucket (imports, invoice PDFs/XMLs, ZIPs)
+- [X] **Stripe account** — live mode enabled, business verified for payouts
+- [X] **Transactional email provider** (Amazon SES, Postmark, Mailgun, Resend…)
+- [ ] **gov.br / NFS-e access** — a **test e-CNPJ A1 certificate** + **produção
+      restrita** access (there is no platform-wide key — see
+      [§8](#8-gov-nfs-e-fiscal-config)). Not required to launch the marketing site
+      + billing on the null driver; **required before real invoices can be issued.**
 
 ---
 
-## 1. Domain & DNS
+## 1. [ ] Domain & DNS
 
-1. [ ] Point the apex + `www` records at the production server IP:
+1. [X] Point the apex + `www` records at the production server IP:
    - `A` `@` → `<server-ip>`
    - `CNAME` `www` → `afilifacil.com.br` (or a second `A` record)
 2. [ ] (Optional) Decide whether Horizon gets its own subdomain
@@ -43,20 +44,20 @@ Provision these first; several later steps block on their credentials.
 
 ---
 
-## 2. Laravel Forge site
+## 2. [X] Laravel Forge site
 
-1. [ ] **Create server** in Forge (PHP 8.4, MySQL 8, Redis). Forge installs
+1. [X] **Create server** in Forge (PHP 8.4, MySQL 8, Redis). Forge installs
    Nginx, PHP-FPM, MySQL, Redis, and a `forge` deploy user by default.
-2. [ ] **Create site** for `afilifacil.com.br`:
+2. [X] **Create site** for `afilifacil.com.br`:
    - Web directory: `/public`
    - PHP version: **8.4**
-3. [ ] **Connect the Git repository** and pick the deploy branch (`main`).
-4. [ ] **Enable Quick Deploy** so pushes to `main` trigger the deploy script.
-5. [ ] **Provision TLS** — Forge → Site → SSL → **Let's Encrypt** for the apex,
+3. [X] **Connect the Git repository** and pick the deploy branch (`main`).
+4. [X] **Enable Quick Deploy** so pushes to `main` trigger the deploy script.
+5. [X] **Provision TLS** — Forge → Site → SSL → **Let's Encrypt** for the apex,
    `www`, and any Horizon subdomain. Force HTTPS.
-6. [ ] **Database** — create the `afilifacil` MySQL database + a dedicated user
+6. [X] **Database** — create the `afilifacil` MySQL database + a dedicated user
    in Forge; note the credentials for [§4](#4-environment-file).
-7. [ ] Set the **deploy script** (Forge → Site → Deploy Script):
+7. [X] Set the **deploy script** (Forge → Site → Deploy Script):
 
    ```bash
    cd /home/forge/afilifacil.com.br
@@ -84,7 +85,7 @@ Provision these first; several later steps block on their credentials.
 
 ---
 
-## 3. Clone / first build
+## 3. [X] Clone / first build
 
 On the first deploy Forge runs the deploy script above automatically. If you are
 bootstrapping by hand instead, from the site root:
@@ -103,7 +104,7 @@ php artisan db:seed --class=MarketplaceSeeder   # seeds Shopee marketplace
 
 ---
 
-## 4. Environment file
+## 4. [X] Environment file
 
 In Forge → Site → **Environment**, set the full production `.env`. Start from
 [`.env.example`](../.env.example) and [OPERATIONS.md § Environment Variables](OPERATIONS.md#environment-variables).
@@ -134,28 +135,28 @@ QUEUE_CONNECTION=redis
 CACHE_STORE=redis
 ```
 
-- [ ] `APP_ENV=production`, `APP_DEBUG=false` (never expose stack traces)
-- [ ] `APP_KEY` generated **once** and kept stable — rotating it breaks every
+- [X] `APP_ENV=production`, `APP_DEBUG=false` (never expose stack traces)
+- [X] `APP_KEY` generated **once** and kept stable — rotating it breaks every
       encrypted value, including stored certificate passwords ([§8](#8-gov-nfs-e-fiscal-config))
-- [ ] `APP_URL` uses `https://`
-- [ ] Redis has a password in production
+- [X] `APP_URL` uses `https://`
+- [X] Redis has a password in production
 
 Remaining sections ([§5](#5-aws-s3)–[§9](#9-email-sending)) fill in the rest of
 this file.
 
 ---
 
-## 5. AWS (S3)
+## 5. [X] AWS (S3)
 
 File storage backs imports, generated invoice PDFs/XMLs, and download ZIPs.
 
-1. [ ] Create a **private** S3 bucket (e.g. `afilifacil-prod`) in your region.
-2. [ ] Keep **Block all public access** ON — the app serves files via
+1. [X] Create a **private** S3 bucket (e.g. `afilifacil-prod`) in your region.
+2. [X] Keep **Block all public access** ON — the app serves files via
    short-lived presigned URLs (`AFILIFACIL_DOWNLOAD_URL_TTL_MINUTES`), never
    public objects.
-3. [ ] Create an **IAM user** with a least-privilege policy scoped to that bucket
+3. [X] Create an **IAM user** with a least-privilege policy scoped to that bucket
    (`s3:GetObject`, `s3:PutObject`, `s3:DeleteObject`, `s3:ListBucket`).
-4. [ ] Set env vars:
+4. [X] Set env vars:
 
    ```env
    FILESYSTEM_DISK=s3
@@ -166,22 +167,29 @@ File storage backs imports, generated invoice PDFs/XMLs, and download ZIPs.
    AWS_USE_PATH_STYLE_ENDPOINT=false
    ```
 
-5. [ ] (Recommended) Add an S3 **lifecycle rule** to expire old ZIP exports
+5. [X] (Recommended) Add an S3 **lifecycle rule** to expire old ZIP exports
    (they are regenerable; TTL is `AFILIFACIL_INVOICE_ZIP_TTL_HOURS`, default 24h).
-6. [ ] Verify: `php artisan tinker` → `Storage::disk('s3')->put('healthcheck.txt','ok')`.
+   **How:** In AWS Console → S3 → `afilifacil-prod` → **Management** tab → **Lifecycle rules** → **Create rule**:
+   - **Rule name:** `expire-old-zips`
+   - **Scope:** This rule applies to all objects in this bucket
+   - **Expiration:** Check "Expire current versions" → set to **1 day** (or match `AFILIFACIL_INVOICE_ZIP_TTL_HOURS`)
+   - Optional: Filter by prefix `zips/` if ZIPs are in a dedicated folder
+   - **Create rule**
+
+6. [X] Verify: `php artisan tinker` → `Storage::disk('s3')->put('healthcheck.txt','ok')`.
 
 > There is no single "gov.br key" stored here — S3 holds fiscal **output** and
 > the per-user certificate vault. Certificates themselves are covered in [§8](#8-gov-nfs-e-fiscal-config).
 
 ---
 
-## 6. Queue worker (Horizon)
+## 6. [X] Queue worker (Horizon)
 
 The entire import → invoice → ZIP pipeline runs on Redis queues
 (`critical`, `high`, `default`, `low`) processed by **Laravel Horizon**. Without
 a running worker, imports hang on "Parsing" forever.
 
-1. [ ] In Forge → Site → **Daemons**, add a daemon:
+1. [X] In Forge → Site → **Daemons**, add a daemon:
    - Command: `php8.4 /home/forge/afilifacil.com.br/artisan horizon`
    - User: `forge`
    - Processes: `1` (Horizon manages its own child workers — see
@@ -192,9 +200,9 @@ a running worker, imports hang on "Parsing" forever.
    > in [OPERATIONS.md § Deployment](OPERATIONS.md#deployment) if you deploy
    > outside Forge.
 
-2. [ ] Confirm the deploy script ends with `php artisan horizon:terminate` (from
+2. [X] Confirm the deploy script ends with `php artisan horizon:terminate` (from
    [§2](#2-laravel-forge-site)) so each release restarts workers with new code.
-3. [ ] **Horizon dashboard access** — Horizon is gated to a list of emails.
+3. [X] **Horizon dashboard access** — Horizon is gated to a list of emails.
    Add authorized admins in
    [`app/Providers/HorizonServiceProvider.php`](../app/Providers/HorizonServiceProvider.php)
    `gate()` (currently empty → nobody can view it in production):
@@ -205,18 +213,18 @@ a running worker, imports hang on "Parsing" forever.
    ]);
    ```
 
-4. [ ] Visit `https://afilifacil.com.br/horizon` and confirm supervisors are
+4. [X] Visit `https://afilifacil.com.br/horizon` and confirm supervisors are
    **active** and queues are draining.
 
 ---
 
-## 7. Scheduler (cron)
+## 7. [X] Scheduler (cron)
 
 One scheduled task exists: monthly reset of each user's NF usage counter
 (`routes/console.php` → `SubscriptionService::resetMonthlyUsage()`, runs 1st of
 month 00:00). Without cron, plan limits never reset.
 
-1. [ ] Forge → Server → **Scheduler**, add a job (Forge writes the crontab):
+1. [X] Forge → Server → **Scheduler**, add a job (Forge writes the crontab):
    - Command: `php8.4 /home/forge/afilifacil.com.br/artisan schedule:run`
    - Frequency: **Every Minute**
 
@@ -226,60 +234,96 @@ month 00:00). Without cron, plan limits never reset.
    * * * * * cd /home/forge/afilifacil.com.br && php artisan schedule:run >> /dev/null 2>&1
    ```
 
-2. [ ] Verify: `php artisan schedule:list` shows the monthly reset.
+2. [X] Verify: `php artisan schedule:list` shows the monthly reset.
 
 ---
 
-## 8. Gov (NFS-e) fiscal config
+## 8. [ ] Gov (NFS-e) fiscal config
 
-> **Launch gating:** the active invoice provider is `AFILIFACIL_INVOICE_DRIVER`,
-> which defaults to **`null`** (`config/afilifacil.php`) — the `NullInvoiceProvider`
-> returns fake invoice numbers. **You can launch the site, billing, and imports
-> with the null driver.** Real NFS-e issuance is blocked until the in-house
-> Padrão Nacional engine ships (see [.ai/nfse/arquitetura.md](nfse/arquitetura.md)
-> and [.ai/backlog.md](backlog.md)). Do **not** flip the driver to `nacional`
-> in production until that engine is built, tested, and validated in restricted
-> production.
+> **Engine status (updated 2026-07):** the in-house Padrão Nacional engine is
+> **built and unit-tested** — `app/Nfse/` (certificate vault, `DpsBuilder`,
+> `DpsSigner` XMLDSig, `SefinNacionalClient` mTLS) + `NacionalNfseProvider`, with
+> `NacionalNfseProviderTest`, `IssuerTest`, `FiscalGateTest`. The per-user A1
+> upload + fiscal onboarding flow (`Settings/Fiscal`, `IssuerController`,
+> `EnsureFiscalReady`) is wired. What remains is **operational**: flip the driver,
+> confirm server extensions, and prove one real emission in restricted production.
+
+> **Launch gating:** the active provider is `AFILIFACIL_INVOICE_DRIVER`, which
+> still **defaults to `null`** (`config/afilifacil.php`) → `NullInvoiceProvider`
+> returns fake numbers. You can launch the site, billing, and imports on the null
+> driver. To issue **real** NFS-e, set `AFILIFACIL_INVOICE_DRIVER=nacional`. Do
+> **not** point real users at `ambiente=producao` until an end-to-end emission has
+> succeeded in **produção restrita** with a real test certificate (see below).
 
 There is **no single platform-wide gov.br API key**. The Sistema Nacional NFS-e
 (Sefin/ADN) authenticates each request with the **issuing company's own A1
 e-CNPJ certificate over mTLS** — so credentials are **per user**, uploaded
-through the app's fiscal onboarding, not set as a server env var.
+through the app's fiscal onboarding, not set as a server env var. There is
+therefore nothing to "register AfiliFacil for" — you only need (a) produção
+restrita access for testing and (b) a test e-CNPJ A1 certificate.
 
-**Platform-level config** (environment endpoints — already have safe defaults in
-`config/afilifacil.php`; only override to switch environments):
+### 8.1 Turn the engine on
+
+- [X] Set the driver and rebuild cached config + restart workers:
+
+  ```env
+  AFILIFACIL_INVOICE_DRIVER=nacional
+  ```
+  ```bash
+  php artisan config:cache && php artisan horizon:terminate
+  ```
+
+- [X] Confirm the server PHP extensions mTLS + signing require (cURL writes a
+      temp PEM per request via `CertificateVault::withTempPem`):
+
+  ```bash
+  php8.4 -m | grep -iE 'openssl|dom|zlib|curl'
+  ```
+
+- [X] `APP_KEY` is stable + backed up — stored certificate passwords are
+      encrypted with it ([§4](#4-environment-file)); rotating it bricks every
+      uploaded PFX. The private S3 bucket ([§5](#5-aws-s3)) holds the encrypted
+      vault, so it must be stable too.
+
+**Environment endpoints** already have safe defaults in `config/afilifacil.php`
+(`nfse.endpoints.producao_restrita` and `.producao`). The client picks the set
+per **Issuer** based on `issuer.ambiente`, not a global env flag — so restricted
+vs real production is a **per-user** choice, not a redeploy. Override the URLs
+only to change environments (note the `_RESTRITA` suffix on the test overrides):
 
 ```env
-# Point at RESTRICTED PRODUCTION first for homologation, then real production.
-NFSE_SEFIN_URL=https://sefin.producaorestrita.nfse.gov.br/SefinNacional
-NFSE_ADN_URL=https://adn.producaorestrita.nfse.gov.br/contribuintes
-NFSE_DANFSE_URL=https://adn.producaorestrita.nfse.gov.br/danfse
-NFSE_PARAM_URL=https://adn.producaorestrita.nfse.gov.br/parametrizacao
+NFSE_SEFIN_URL_RESTRITA=https://sefin.producaorestrita.nfse.gov.br/SefinNacional
+NFSE_SEFIN_URL=https://sefin.nfse.gov.br/SefinNacional
 NFSE_VER_APLIC=AfiliFacil-1.0
 NFSE_HTTP_TIMEOUT=30
 ```
 
-Pre-launch fiscal checklist (once the engine exists):
+### 8.2 Prove one real emission before trusting it
 
-- [ ] Register AfiliFacil / obtain access to the **Ambiente de Dados Nacional
-      (ADN)** and the **Emissor Nacional** portal via **gov.br**
-      (see [.ai/nfse/pesquisa.md](nfse/pesquisa.md) §2 for URLs & credentials flow)
-- [ ] Confirm the destination municipality(ies) are live on the Padrão Nacional
-      (`MunicipalityResolver` must find an active driver)
-- [ ] Validate an end-to-end emission in **produção restrita** (restricted prod)
-      with a real test certificate before switching `NFSE_*` to the production URLs
-- [ ] Ensure the **certificate vault** is configured: PFX files are encrypted by
-      the app (envelope keyed off `APP_KEY`) **before** hitting S3 — so `APP_KEY`
-      and the S3 bucket ([§5](#5-aws-s3)) must be stable and backed up
-- [ ] Confirm the **fiscal onboarding gate** (`EnsureFiscalProfileComplete`) is
-      active so users can't issue without a complete, certificate-backed profile
+- [ ] Obtain a **test e-CNPJ A1** and **produção restrita** access via gov.br
+      (see [.ai/nfse/pesquisa.md](nfse/pesquisa.md) §2). No platform key exists —
+      this is per-CNPJ, per-certificate.
+- [ ] Complete a test Issuer's fiscal profile — `fiscalReady()` requires
+      `legal_name`, valid `tax_document` (CNPJ, modulo-11), `address_ibge_code`,
+      `service_code` (`cTribNac`, e.g. LC 116 **10.05** for intermediação —
+      confirm with an accountant), `regime_tributario`; for
+      `emission_mode=Automated` also a valid **certificate** + **portal validation**.
+- [ ] Set that Issuer's `ambiente` to **produção restrita** and issue one invoice
+      end-to-end (build DPS → sign → mTLS → chave de acesso). This is the real
+      proof the DPS passes XSD + municipal rules — **zero legal effect**.
+- [ ] Confirm the destination município is live on the Padrão Nacional
+      (`SefinNacionalClient::consultarParametros` succeeds for its IBGE code).
+- [ ] Only then set real users' Issuer `ambiente` to **produção**. A production
+      NFS-e is a legally valid fiscal document (ISS due; cancelamento has
+      municipal deadlines — see [.ai/nfse/pesquisa.md](nfse/pesquisa.md) §13).
 
 **Per-user (runtime, not deploy):** each customer uploads their A1 e-CNPJ
-certificate + password and completes their fiscal profile in `Settings/Fiscal`.
+certificate + password and completes their fiscal profile in `Settings/Fiscal`;
+the `EnsureFiscalReady` gate blocks paid checkout until it's complete.
 
 ---
 
-## 9. Email sending
+## 9. [ ] Email sending
 
 Transactional email delivers invoice-ready notifications, ZIP-download links,
 and auth emails (verification, password reset).
@@ -307,7 +351,7 @@ and auth emails (verification, password reset).
 
 ---
 
-## 10. Stripe (billing)
+## 10. [ ] Stripe (billing)
 
 Plans: `free` (5 NF), `basic` (R$39,90 / 50 NF), `advanced` (R$169,90 /
 unlimited) — see `config/plans.php`. Billing runs on Laravel Cashier.
@@ -335,7 +379,7 @@ unlimited) — see `config/plans.php`. Billing runs on Laravel Cashier.
 
 ---
 
-## 11. Go-live verification
+## 11. [ ] Go-live verification
 
 After the first successful deploy, walk the happy path end-to-end:
 
@@ -353,7 +397,7 @@ After the first successful deploy, walk the happy path end-to-end:
 
 ---
 
-## 12. Redeploy routine
+## 12. [ ] Redeploy routine
 
 For every release after the first, a push to `main` (Quick Deploy) runs the
 [§2 deploy script](#2-laravel-forge-site), which:
